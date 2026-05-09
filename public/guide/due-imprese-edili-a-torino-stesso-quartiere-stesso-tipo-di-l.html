@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preventivo veloce: chiudi più commesse edili</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.65);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Poppins','Helvetica Neue',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      min-height:100vh;
+    }
+
+    /* ─── HEADER ─── */
+    .hero {
+      background: linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%);
+      border-bottom: 1px solid rgba(212,78,18,0.2);
+      padding: 48px 24px 56px;
+      text-align: center;
+    }
+    .brand-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px;
+      font-size:13px; font-weight:700; color:var(--accent);
+      text-transform:uppercase; letter-spacing:2px;
+    }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 {
+      font-size:clamp(2rem,5vw,3.2rem);
+      font-weight:900; color:var(--text);
+      line-height:1.1; margin-bottom:20px;
+    }
+    .hero h1 em { color:var(--accent); font-style:normal; }
+    .hero .sub {
+      font-size:1.1rem; color:var(--text-mut); max-width:600px; margin:0 auto 32px;
+    }
+    .hero-meta {
+      display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
+    }
+    .meta-pill {
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:24px; padding:8px 18px;
+      font-size:13px; font-weight:600; color:var(--text-mut);
+    }
+    .meta-pill span { color:var(--text); }
+
+    /* ─── CONTAINER ─── */
+    .container { max-width:800px; margin:0 auto; padding:0 24px; }
+
+    /* ─── SECTION ─── */
+    section { padding:56px 0 0; }
+    .section-label {
+      font-size:11px; font-weight:800; color:var(--accent);
+      text-transform:uppercase; letter-spacing:4px; margin-bottom:12px;
+    }
+    .section-title {
+      font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800;
+      color:var(--text); line-height:1.2; margin-bottom:32px;
+    }
+
+    /* ─── OUTPUT CARDS ─── */
+    .output-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
+    }
+    .output-card {
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:28px;
+      transition:border-color .2s, background .2s;
+    }
+    .output-card:hover { border-color:rgba(212,78,18,0.4); background:rgba(212,78,18,0.05); }
+    .output-icon { font-size:36px; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p  { font-size:.9rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── ERRORI ─── */
+    .errori-list { display:flex; flex-direction:column; gap:16px; }
+    .err-item {
+      background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2);
+      border-left:4px solid #ef4444;
+      border-radius:12px; padding:20px 24px;
+    }
+    .err-title { font-size:.95rem; font-weight:700; color:#fca5a5; margin-bottom:6px; }
+    .err-desc  { font-size:.875rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── STEP ─── */
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px; padding:32px;
+    }
+    .step-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:20px; }
+    .step-number {
+      flex-shrink:0; width:56px; height:56px; border-radius:14px;
+      background:var(--accent); color:#fff;
+      font-size:1.3rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .step-title { font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .step-time  { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.9rem; color:var(--text-mut); line-height:1.6; margin-bottom:20px; }
+    .action-list { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+    .action-item {
+      display:flex; gap:14px; align-items:flex-start;
+      background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px;
+      font-size:.9rem;
+    }
+    .action-arrow { color:var(--accent); font-weight:800; flex-shrink:0; }
+    .callout {
+      border-radius:12px; padding:16px 20px;
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:.875rem; line-height:1.5;
+    }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#93c5fd; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#86efac; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fcd34d; }
+    .callout.danger  { background:rgba(239,68,68,0.1);  border:1px solid rgba(239,68,68,0.25);  color:#fca5a5; }
+    .callout-icon    { flex-shrink:0; font-size:1.1rem; }
+
+    /* ─── TOOL ─── */
+    .tool-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+    .tool-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:24px;
+    }
+    .tool-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .tool-name   { font-size:1rem; font-weight:700; color:var(--text); }
+    .tool-badge  { font-size:11px; font-weight:700; color:#fff; border-radius:20px; padding:3px 10px; }
+    .tool-desc   { font-size:.875rem; color:var(--text-mut); line-height:1.5; margin-bottom:14px; }
+    .tool-link   {
+      font-size:.85rem; font-weight:700; color:var(--accent);
+      text-decoration:none; border:1px solid rgba(212,78,18,0.3);
+      border-radius:8px; padding:6px 14px; display:inline-block;
+    }
+    .tool-link:hover { background:rgba(212,78,18,0.1); }
+
+    /* ─── CTA ─── */
+    .cta-block {
+      margin:64px 0 0;
+      background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3);
+      border-radius:24px; padding:48px 40px; text-align:center;
+    }
+    .cta-block h2 {
+      font-size:clamp(1.5rem,4vw,2.2rem); font-weight:900;
+      color:var(--text); margin-bottom:16px;
+    }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:480px; margin:0 auto 32px; }
+    .cta-btn {
+      display:inline-block; background:var(--accent); color:#fff;
+      font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px;
+      padding:16px 40px; border-radius:12px; text-decoration:none;
+      transition:background .2s, transform .15s;
+    }
+    .cta-btn:hover { background:#b83a0a; transform:translateY(-2px); }
+    .keyword-tag {
+      display:inline-block; background:rgba(212,78,18,0.15); border:1px solid rgba(212,78,18,0.3);
+      color:var(--accent); font-size:.8rem; font-weight:700; letter-spacing:2px;
+      border-radius:20px; padding:5px 14px; margin-top:20px;
+      text-transform:uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align:center; padding:40px 24px; margin-top:56px;
+      border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent); margin-bottom:8px; }
+    .footer-sub   { font-size:.8rem; color:var(--text-mut); }
+
+    /* ─── ANIMATION ─── */
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .5s ease,transform .5s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="brand-badge">
+      <div class="brand-dot"></div>
+      Cantieri Hub — Guida Pratica
+    </div>
+    <h1>Preventivo veloce: chiudi più commesse edili</h1>
+    <p class="sub">Segui questi step e manda il tuo prossimo preventivo in 20 minuti. Professionale, intestato, pronto per essere firmato.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">⏱ Tempo: <span>8 minuti</span></div>
+      <div class="meta-pill">📐 Settore: <span>Edilizia</span></div>
+      <div class="meta-pill">🤖 Powered by: <span>AI</span></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- COSA OTTIENI -->
+    <section>
+      <div class="section-label">Risultati concreti</div>
+      <h2 class="section-title">Cosa ottieni da questa guida</h2>
+      <div class="output-grid">
+        <div class="output-card fade-in">
+          <div class="output-icon">⚡</div>
+          <h4>Preventivo in 20 minuti</h4>
+          <p>Impari a strutturare un preventivo completo nel tempo in cui il tuo concorrente sta ancora aprendo il foglio Excel. Dati corretti, layout professionale, nessun errore di calcolo.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">📲</div>
+          <h4>Risposta prima degli altri</h4>
+          <p>Capisci perché la velocità di risposta vale più del prezzo più basso. Il cliente che riceve il tuo PDF per primo si sente già in mano a qualcuno di competente.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">📈</div>
+          <h4>Più commesse ogni mese</h4>
+          <p>Vedi la differenza concreta tra gestire 3 preventivi al mese a mano e arrivare a 12 con un processo ottimizzato. Stessa qualità del lavoro, tempi completamente diversi.</p>
+        </div></div>
+    </section>
+
+    <!-- ERRORI -->
+    <section>
+      <div class="section-label">Trappole comuni</div>
+      <h2 class="section-title">Gli errori che rallentano la tua impresa</h2>
+      <div class="errori-list">
+        <div class="err-item fade-in">
+          <div class="err-title">Fare il computo a mano con prezzi vecchi</div>
+          <div class="err-desc">Usare prezzi memorizzati o listini dell'anno scorso senza verificare il prezzario aggiornato ti espone a due rischi: margini erosi senza accorgertene o preventivi fuori mercato che perdi in partenza. Il cliente non lo sa, ma tu ci rimetti.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Aspettare di avere 'tutto pronto' per mandare</div>
+          <div class="err-desc">Molti imprenditori trattengono il preventivo per ricontrollarlo un'ultima volta. Risultato: arriva in ritardo di 2-3 giorni. Nel frattempo il concorrente ha già mandato il suo — magari meno preciso — e il cliente ha già deciso.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Preventivo senza intestazione e layout professionale</div>
+          <div class="err-desc">Un preventivo scritto su carta intestata generica o, peggio, in un'email di testo senza struttura trasmette improvvisazione. Il cliente percepisce la tua serietà già dal documento, prima ancora di leggere i numeri.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Nessun sistema per gestire i preventivi in attesa</div>
+          <div class="err-desc">Se non tieni traccia di chi ha ricevuto il preventivo, quando e se ha risposto, perdi il controllo del tuo imbuto commerciale. Commesse che potevano chiudersi svaniscono semplicemente perché non hai ricontattato il cliente in tempo.</div>
+        </div></div>
+    </section>
+
+    <!-- STEP -->
+    <section>
+      <div class="section-label">Guida passo dopo passo</div>
+      <h2 class="section-title">Come farlo adesso</h2>
+      <div class="steps-list">
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">01</div>
+            <div>
+              <h3 class="step-title">Capire perché vince chi arriva primo</h3>
+              <div class="step-time">⏱ 2 minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Prima di cambiare come lavori, devi interiorizzare un concetto: il cliente medio non ha strumenti per valutare la qualità tecnica di due preventivi edili. Quello che valuta è la velocità di risposta e la sensazione di essere in mano a qualcuno di organizzato. Chi arriva primo vince quasi sempre, a parità di prezzo.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Pensa all'ultima commessa che hai perso: sai con certezza se hai risposto prima o dopo del concorrente?</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Stabilisci una regola ferma: ogni richiesta di preventivo riceve una risposta (anche solo un messaggio di presa in carico) entro 2 ore dall'arrivo.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Comunica al cliente i tempi di consegna del preventivo completo nel primo contatto — questo già ti differenzia da chi non lo fa mai.</div>
+            </div></div>
+          
+            <div class="callout info">
+              <span class="callout-icon">ℹ️</span>
+              <span>Il cliente non aspetta il preventivo migliore. Aspetta il primo che arriva e lo fa sentire già seguito. Tienilo a mente ogni volta che sei tentato di rimandare.</span>
+            </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">02</div>
+            <div>
+              <h3 class="step-title">Strutturare il preventivo in modo rapido e corretto</h3>
+              <div class="step-time">⏱ 3 minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Il collo di bottiglia non è la tua competenza tecnica — è il tempo che ci vuole a mettere tutto nero su bianco in modo ordinato. Un preventivo professionale deve avere intestazione, voci di computo chiare, prezzi aggiornati al prezzario di riferimento e un totale verificato. Se fai questo a mano ogni volta, stai perdendo ore preziose.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Usa sempre il prezzario regionale aggiornato come base per le voci di costo — non affidarti a prezzi a memoria o listini vecchi di 12 mesi.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Crea un modello base con intestazione, logo, dati fiscali e struttura delle voci già impostata: ti basterà compilare i dati specifici del lavoro.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Separa chiaramente le voci: manodopera, materiali, noli, spese generali e margine. Un preventivo trasparente nella struttura ispira più fiducia.</div>
+            </div></div>
+          
+            <div class="callout warning">
+              <span class="callout-icon">⚠️</span>
+              <span>Attenzione ai prezzi dei materiali: se il tuo preventivo ha 30 giorni di validità, verifica che i costi delle forniture non siano già cambiati prima di mandarlo.</span>
+            </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">03</div>
+            <div>
+              <h3 class="step-title">Usare l'AI per passare da 7 ore a 20 minuti</h3>
+              <div class="step-time">⏱ 2 minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Sette ore di lavoro manuale contro venti minuti: questa è la differenza concreta tra fare il computo a mano e usare uno strumento AI pensato per l'edilizia. Non si tratta di tecnologia fine a se stessa — si tratta di avere il PDF pronto, intestato e corretto mentre il concorrente è ancora a metà foglio.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Inserisci le voci di lavoro nel Preventivatore AI di Cantieri Hub: descrizione, quantità e unità di misura. Il sistema calcola i prezzi aggiornati e genera il documento.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Controlla il preventivo generato in uscita — pochi minuti di verifica tecnica da parte tua sono sufficienti, il calcolo è già fatto.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Manda il PDF direttamente al cliente via WhatsApp o email: intestato, professionale, con i tuoi dati. Il cliente lo apre e si sente già seguito da qualcuno che sa quello che fa.</div>
+            </div></div>
+          
+            <div class="callout success">
+              <span class="callout-icon">✅</span>
+              <span>20 minuti per preventivo significa che puoi gestirne 12 al mese invece di 3. Non stai lavorando di più — stai lavorando meglio.</span>
+            </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">04</div>
+            <div>
+              <h3 class="step-title">Tracciare i preventivi inviati e ricontattare</h3>
+              <div class="step-time">⏱ 1 minuto</div>
+            </div>
+          </div>
+          <p class="step-intro">Mandare il preventivo veloce è metà del lavoro. L'altra metà è sapere dove sono le tue trattative aperte e ricontattare al momento giusto. Un follow-up a 48-72 ore dall'invio, con un semplice messaggio, può fare la differenza tra una commessa chiusa e una persa nel silenzio.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Tieni un registro semplice dei preventivi inviati: cliente, data invio, importo, stato (attesa / in trattativa / chiuso / perso).</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Imposta un promemoria per ricontattare ogni cliente a 48 ore dall'invio se non ha risposto.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Al follow-up, non chiedere 'ha visto il preventivo?' — chiedi se ha domande su qualche voce specifica. Dimostri competenza e apri la conversazione.</div>
+            </div></div>
+          
+            <div class="callout success">
+              <span class="callout-icon">✅</span>
+              <span>Un follow-up ben fatto non è pressione — è servizio. Il cliente percepisce che sei presente e organizzato, esattamente come vuole che tu sia in cantiere.</span>
+            </div>
+        </div></div>
+    </section>
+
+    <!-- TOOL -->
+    <section>
+      <div class="section-label">Strumenti consigliati</div>
+      <h2 class="section-title">Tool e risorse</h2>
+      <div class="tool-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Preventivatore AI — Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Genera preventivi edili completi in 20 minuti: voci di computo, prezzi aggiornati, layout professionale e intestazione pronta. Pensato per imprenditori edili e geometri italiani.</p>
+          <a class="tool-link" href="https://cantierihub.com" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Computatore AI — Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Compila il computo metrico estimativo partendo dalle misure del progetto. Riduce gli errori di calcolo e accelera la fase di analisi prima di emettere il preventivo.</p>
+          <a class="tool-link" href="https://cantierihub.com" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">WhatsApp Business</span>
+            <span class="tool-badge" style="background:#16a34a">GRATIS</span>
+          </div>
+          <p class="tool-desc">Usa le risposte rapide per inviare il PDF del preventivo e impostare messaggi automatici di presa in carico entro 2 ore. Professionale e già sul telefono che usi ogni giorno.</p>
+          <a class="tool-link" href="https://business.whatsapp.com" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Google Sheets</span>
+            <span class="tool-badge" style="background:#16a34a">GRATIS</span>
+          </div>
+          <p class="tool-desc">Registro semplice per tracciare preventivi inviati, date e stato della trattativa. Accessibile da smartphone anche in cantiere, senza installare nulla.</p>
+          <a class="tool-link" href="https://sheets.google.com" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div></div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block fade-in">
+      <h2>Fai il tuo primo preventivo in 20 minuti</h2>
+      <p>Con il Preventivatore AI di Cantieri Hub inserisci le voci di lavoro e ottieni un PDF professionale, intestato e con i prezzi aggiornati. Nessun calcolo a mano, nessun foglio Excel da impostare da zero. Prova su un preventivo reale e vedi la differenza di tempo.</p>
+      <a class="cta-btn" href="https://cantierihub.com" target="_blank" rel="noopener">
+        Scopri Cantieri Hub →
+      </a>
+      <br>
+      <div class="keyword-tag">Keyword: PREVENTIVO</div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-brand">Cantieri Hub</div>
+      <div class="footer-sub">"10 preventivi nel tempo di uno." — cantierihub.com</div>
+    </div>
+
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+      {threshold:0.1}
+    );
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
