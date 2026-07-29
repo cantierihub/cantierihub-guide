@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Computo metrico senza errori: dal progetto alle voci</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.65);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Poppins','Helvetica Neue',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      min-height:100vh;
+    }
+
+    /* ─── HEADER ─── */
+    .hero {
+      background: linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%);
+      border-bottom: 1px solid rgba(212,78,18,0.2);
+      padding: 48px 24px 56px;
+      text-align: center;
+    }
+    .brand-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px;
+      font-size:13px; font-weight:700; color:var(--accent);
+      text-transform:uppercase; letter-spacing:2px;
+    }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 {
+      font-size:clamp(2rem,5vw,3.2rem);
+      font-weight:900; color:var(--text);
+      line-height:1.1; margin-bottom:20px;
+    }
+    .hero h1 em { color:var(--accent); font-style:normal; }
+    .hero .sub {
+      font-size:1.1rem; color:var(--text-mut); max-width:600px; margin:0 auto 32px;
+    }
+    .hero-meta {
+      display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
+    }
+    .meta-pill {
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:24px; padding:8px 18px;
+      font-size:13px; font-weight:600; color:var(--text-mut);
+    }
+    .meta-pill span { color:var(--text); }
+
+    /* ─── CONTAINER ─── */
+    .container { max-width:800px; margin:0 auto; padding:0 24px; }
+
+    /* ─── SECTION ─── */
+    section { padding:56px 0 0; }
+    .section-label {
+      font-size:11px; font-weight:800; color:var(--accent);
+      text-transform:uppercase; letter-spacing:4px; margin-bottom:12px;
+    }
+    .section-title {
+      font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800;
+      color:var(--text); line-height:1.2; margin-bottom:32px;
+    }
+
+    /* ─── OUTPUT CARDS ─── */
+    .output-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
+    }
+    .output-card {
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:28px;
+      transition:border-color .2s, background .2s;
+    }
+    .output-card:hover { border-color:rgba(212,78,18,0.4); background:rgba(212,78,18,0.05); }
+    .output-icon { font-size:36px; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p  { font-size:.9rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── ERRORI ─── */
+    .errori-list { display:flex; flex-direction:column; gap:16px; }
+    .err-item {
+      background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2);
+      border-left:4px solid #ef4444;
+      border-radius:12px; padding:20px 24px;
+    }
+    .err-title { font-size:.95rem; font-weight:700; color:#fca5a5; margin-bottom:6px; }
+    .err-desc  { font-size:.875rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── STEP ─── */
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px; padding:32px;
+    }
+    .step-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:20px; }
+    .step-number {
+      flex-shrink:0; width:56px; height:56px; border-radius:14px;
+      background:var(--accent); color:#fff;
+      font-size:1.3rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .step-title { font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .step-time  { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.9rem; color:var(--text-mut); line-height:1.6; margin-bottom:20px; }
+    .action-list { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+    .action-item {
+      display:flex; gap:14px; align-items:flex-start;
+      background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px;
+      font-size:.9rem;
+    }
+    .action-arrow { color:var(--accent); font-weight:800; flex-shrink:0; }
+    .callout {
+      border-radius:12px; padding:16px 20px;
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:.875rem; line-height:1.5;
+    }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#93c5fd; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#86efac; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fcd34d; }
+    .callout.danger  { background:rgba(239,68,68,0.1);  border:1px solid rgba(239,68,68,0.25);  color:#fca5a5; }
+    .callout-icon    { flex-shrink:0; font-size:1.1rem; }
+
+    /* ─── TOOL ─── */
+    .tool-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+    .tool-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:24px;
+    }
+    .tool-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .tool-name   { font-size:1rem; font-weight:700; color:var(--text); }
+    .tool-badge  { font-size:11px; font-weight:700; color:#fff; border-radius:20px; padding:3px 10px; }
+    .tool-desc   { font-size:.875rem; color:var(--text-mut); line-height:1.5; margin-bottom:14px; }
+    .tool-link   {
+      font-size:.85rem; font-weight:700; color:var(--accent);
+      text-decoration:none; border:1px solid rgba(212,78,18,0.3);
+      border-radius:8px; padding:6px 14px; display:inline-block;
+    }
+    .tool-link:hover { background:rgba(212,78,18,0.1); }
+
+    /* ─── CTA ─── */
+    .cta-block {
+      margin:64px 0 0;
+      background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3);
+      border-radius:24px; padding:48px 40px; text-align:center;
+    }
+    .cta-block h2 {
+      font-size:clamp(1.5rem,4vw,2.2rem); font-weight:900;
+      color:var(--text); margin-bottom:16px;
+    }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:480px; margin:0 auto 32px; }
+    .cta-btn {
+      display:inline-block; background:var(--accent); color:#fff;
+      font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px;
+      padding:16px 40px; border-radius:12px; text-decoration:none;
+      transition:background .2s, transform .15s;
+    }
+    .cta-btn:hover { background:#b83a0a; transform:translateY(-2px); }
+    .keyword-tag {
+      display:inline-block; background:rgba(212,78,18,0.15); border:1px solid rgba(212,78,18,0.3);
+      color:var(--accent); font-size:.8rem; font-weight:700; letter-spacing:2px;
+      border-radius:20px; padding:5px 14px; margin-top:20px;
+      text-transform:uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align:center; padding:40px 24px; margin-top:56px;
+      border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent); margin-bottom:8px; }
+    .footer-sub   { font-size:.8rem; color:var(--text-mut); }
+
+    /* ─── ANIMATION ─── */
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .5s ease,transform .5s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="brand-badge">
+      <div class="brand-dot"></div>
+      Cantieri Hub · Guida Pratica
+    </div>
+    <h1>Computo metrico senza errori: dal progetto alle voci</h1>
+    <p class="sub">Segui questi step e chiudi il computo di un intervento in mezz'ora: voci complete, quantità verificabili, prezzi allineati al prezzario.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">⏱ Tempo: <span>9&nbsp;minuti</span></div>
+      <div class="meta-pill">📐 Settore: <span>Edilizia</span></div>
+      <div class="meta-pill">🤖 Powered by: <span>AI</span></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- COSA OTTIENI -->
+    <section>
+      <div class="section-label">Risultati concreti</div>
+      <h2 class="section-title">Cosa ottieni da questa guida</h2>
+      <div class="output-grid">
+        <div class="output-card fade-in">
+          <div class="output-icon">📐</div>
+          <h4>Il computo parte da quello che hai già</h4>
+          <p>Impari a costruire il computo metrico da una descrizione a voce, dalle foto del sopralluogo o dalla piantina. Non serve avere il capitolato perfetto prima di iniziare.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">🔍</div>
+          <h4>Voci che non ti dimentichi</h4>
+          <p>Capisci come far emergere le voci mancanti prima di consegnare, invece di scoprirle in cantiere quando la variante la paghi tu.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">⏱</div>
+          <h4>Ore di misurazioni in minuti</h4>
+          <p>Passi dal misurare a mano sulla piantina a quantità già calcolate, con il ragionamento in chiaro sotto ogni voce: le controlli, non le prendi per buone.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ERRORI -->
+    <section>
+      <div class="section-label">Trappole comuni</div>
+      <h2 class="section-title">Gli errori che ti costano in fase di computo</h2>
+      <div class="errori-list">
+        <div class="err-item fade-in">
+          <div class="err-title">Riciclare il computo di un lavoro simile</div>
+          <div class="err-desc">È la scorciatoia più diffusa e la più cara. Ti porti dietro quantità che appartenevano a un altro cantiere, voci che lì servivano e qui no, e soprattutto un prezzario vecchio. Il documento sembra completo, ma descrive un lavoro che non stai facendo.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Misurare a occhio e arrotondare per eccesso</div>
+          <div class="err-desc">Arrotondare sembra prudente: se sbaglio, sbaglio in mio favore. In gara però quell'eccesso ti mette fuori mercato, e sui lavori privati gonfia un'offerta che il cliente confronta con altre due. La prudenza va messa nel margine dichiarato, non nascosta nelle quantità.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Chiudere il computo senza cercare i buchi</div>
+          <div class="err-desc">Le varianti in corso d'opera quasi mai nascono da imprevisti veri: nascono da una voce che nessuno aveva previsto. Ponteggi, smaltimenti, opere provvisionali, allacci. Un controllo mirato delle voci mancanti prima di consegnare vale più di tre riletture del documento.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Tenere computo e preventivo come due mondi separati</div>
+          <div class="err-desc">Se il computo tecnico e l'offerta commerciale vivono in file diversi e scollegati, ogni modifica va riportata due volte a mano. È lì che nascono le incoerenze tra quello che hai calcolato e quello che il cliente legge.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP -->
+    <section>
+      <div class="section-label">Guida passo dopo passo</div>
+      <h2 class="section-title">Come farlo adesso</h2>
+      <div class="steps-list">
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">01</div>
+            <div>
+              <h3 class="step-title">Metti insieme il materiale che hai già</h3>
+              <div class="step-time">⏱ 2&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Non serve il progetto esecutivo completo per iniziare a computare. Serve sapere cosa hai in mano, perché è questo che decide da dove parti. La maggior parte dei computi si può aprire con materiale che hai già sul telefono.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Raccogli le foto del sopralluogo: ambienti, stato di fatto, dettagli critici come impianti a vista o parti ammalorate.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Recupera la piantina, se ce l'hai. Va bene una piantina architettonica standard in PDF o in immagine, non serve un formato tecnico particolare.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Metti da parte il capitolato o l'elenco lavori del committente, se il lavoro nasce da una gara.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Scrivi in due righe cosa va fatto, come lo diresti a un collega: è la descrizione da cui l'AI può già costruire le prime voci.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">02</div>
+            <div>
+              <h3 class="step-title">Scegli il punto di partenza</h3>
+              <div class="step-time">⏱ 2&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">I computi non nascono tutti allo stesso modo, e forzarli in un unico schema è il motivo per cui molti si fermano. Le strade sono tre e cambiano solo il punto di ingresso: il risultato è sempre un computo strutturato.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Da zero: hai solo la descrizione del lavoro e le foto del sopralluogo. È il caso del privato che ti chiama per una ristrutturazione.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Da documento: parti da un capitolato in PDF o da un elenco lavori in Excel, e le voci vengono estratte da lì. È il caso della gara d'appalto.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Da archivio: riprendi un computo già fatto e lo adatti al nuovo intervento, con le quantità ricalcolate sul lavoro reale invece che copiate.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Scegli la strada in base a cosa hai davvero, non a cosa vorresti avere: il computo si affina strada facendo.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">03</div>
+            <div>
+              <h3 class="step-title">Lascia generare le voci e verificale a campione</h3>
+              <div class="step-time">⏱ 5&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Qui il lavoro cambia natura: non scrivi più le voci una per una, le controlli. Ogni voce arriva con la sua unità di misura e la quantità, e sotto trovi il ragionamento con cui è stata stimata. Il tuo mestiere serve tutto in questa fase, ma concentrato dove conta.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Apri le voci più pesanti per importo e verifica il ragionamento dietro la quantità: è lì che un errore fa danno.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Controlla le unità di misura una per una. Un metro quadro scambiato per un metro lineare non si vede nel totale, si vede in cantiere.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Confronta due o tre quantità con una misura tua sulla piantina. Se tornano, puoi fidarti del resto e andare avanti.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Correggi direttamente quello che non torna: la voce si aggiorna e il totale si ricalcola da solo.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">04</div>
+            <div>
+              <h3 class="step-title">Cerca i buchi prima di consegnare</h3>
+              <div class="step-time">⏱ 4&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Questo è lo step che gli altri saltano ed è quello che ti evita la variante. Un computo si giudica da quello che manca, non da quello che c'è. Usa la chat integrata come useresti un collega tecnico esperto a cui far rileggere il documento prima di mandarlo.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Chiedi esplicitamente cosa manca per questo tipo di intervento: ponteggi, opere provvisionali, smaltimento macerie, allacci, oneri della sicurezza.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Rileggi le voci con quantità sospette: uno zero di troppo o di meno si nota solo se lo cerchi.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Verifica che ci sia una voce per ogni lavorazione che hai fotografato in sopralluogo: le foto sono la tua lista di controllo.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Segna a parte le lavorazioni che dipendono da scelte del committente ancora aperte: vanno dichiarate, non stimate a caso.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">05</div>
+            <div>
+              <h3 class="step-title">Abbina i prezzi, esporta e passa all'offerta</h3>
+              <div class="step-time">⏱ 3&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Il computo diventa utile quando esce dal tuo computer. Prima però i prezzi vanno allineati alla fonte giusta, perché è la parte che invecchia più in fretta e quella su cui il committente ha più occhi.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Assegna i prezzi unitari scegliendo la fonte: il tuo prezzario interno, i prezzari regionali aggiornati, oppure la ricerca AI per le voci che non trovi.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Esporta il PDF tecnico con il logo della tua azienda: è il documento che accompagna la gara o che alleghi all'offerta.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Porta il computo nel Preventivatore AI per trasformarlo in offerta commerciale, senza ribattere niente a mano.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Archivia il computo con un nome che ritroverai fra sei mesi: sarà il punto di partenza del prossimo lavoro simile.</div>
+            </div>
+          </div>
+          <div class="callout success">
+            <span class="callout-icon">✅</span>
+            <span>Computo tecnico e offerta commerciale sono due documenti diversi per due lettori diversi. Il committente pubblico legge il computo, il privato legge l'offerta. Averli collegati significa non riscrivere due volte lo stesso lavoro.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL -->
+    <section>
+      <div class="section-label">Strumenti consigliati</div>
+      <h2 class="section-title">Tool e risorse</h2>
+      <div class="tool-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Computatore AI · Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Genera il computo metrico da zero partendo da una descrizione e dalle foto del sopralluogo, oppure estrae le voci da un capitolato. Ricava le quantità dalle piantine e mostra il ragionamento dietro ogni stima. La chat integrata controlla che non manchi nulla.</p>
+          <a class="tool-link" href="https://cantierihub.com/computatore?utm_source=guida&utm_medium=lead-magnet&utm_campaign=computo-metrico-senza-errori-dal-progetto-alle-voci&utm_content=tool-computatore" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Preventivatore AI · Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Trasforma il computo in offerta commerciale: prezzi aggiornati, layout professionale e PDF intestato pronto da mandare al cliente. È il passo successivo, non un doppione del Computatore AI.</p>
+          <a class="tool-link" href="https://cantierihub.com/preventivatore?utm_source=guida&utm_medium=lead-magnet&utm_campaign=computo-metrico-senza-errori-dal-progetto-alle-voci&utm_content=tool-preventivatore" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block fade-in">
+      <h2>Vedi il Computatore AI sui tuoi file</h2>
+      <p>Porta un tuo computo vero, una piantina o le foto dell'ultimo sopralluogo. In una demo gratuita di 30&nbsp;minuti guardiamo insieme come si comporta sul tuo materiale, non su un esempio costruito a tavolino. Se non fa al caso tuo, te lo diciamo.</p>
+      <a class="cta-btn" href="https://cantierihub.com/computatore?utm_source=guida&utm_medium=lead-magnet&utm_campaign=computo-metrico-senza-errori-dal-progetto-alle-voci&utm_content=cta-finale" target="_blank" rel="noopener">
+        Scopri il Computatore AI →
+      </a>
+      <br>
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+      <div class="footer-brand">Cantieri Hub</div>
+      <div class="footer-sub">"10 preventivi nel tempo di uno." · cantierihub.com</div>
+    </div>
+
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+      {threshold:0.1}
+    );
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
