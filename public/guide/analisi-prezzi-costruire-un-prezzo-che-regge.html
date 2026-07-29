@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analisi prezzi: costruire un prezzo che regge in cantiere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.65);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Poppins','Helvetica Neue',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      min-height:100vh;
+    }
+
+    /* ─── HEADER ─── */
+    .hero {
+      background: linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%);
+      border-bottom: 1px solid rgba(212,78,18,0.2);
+      padding: 48px 24px 56px;
+      text-align: center;
+    }
+    .brand-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px;
+      font-size:13px; font-weight:700; color:var(--accent);
+      text-transform:uppercase; letter-spacing:2px;
+    }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 {
+      font-size:clamp(2rem,5vw,3.2rem);
+      font-weight:900; color:var(--text);
+      line-height:1.1; margin-bottom:20px;
+    }
+    .hero h1 em { color:var(--accent); font-style:normal; }
+    .hero .sub {
+      font-size:1.1rem; color:var(--text-mut); max-width:600px; margin:0 auto 32px;
+    }
+    .hero-meta {
+      display:flex; gap:24px; justify-content:center; flex-wrap:wrap;
+    }
+    .meta-pill {
+      background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+      border-radius:24px; padding:8px 18px;
+      font-size:13px; font-weight:600; color:var(--text-mut);
+    }
+    .meta-pill span { color:var(--text); }
+
+    /* ─── CONTAINER ─── */
+    .container { max-width:800px; margin:0 auto; padding:0 24px; }
+
+    /* ─── SECTION ─── */
+    section { padding:56px 0 0; }
+    .section-label {
+      font-size:11px; font-weight:800; color:var(--accent);
+      text-transform:uppercase; letter-spacing:4px; margin-bottom:12px;
+    }
+    .section-title {
+      font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800;
+      color:var(--text); line-height:1.2; margin-bottom:32px;
+    }
+
+    /* ─── OUTPUT CARDS ─── */
+    .output-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
+    }
+    .output-card {
+      background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:28px;
+      transition:border-color .2s, background .2s;
+    }
+    .output-card:hover { border-color:rgba(212,78,18,0.4); background:rgba(212,78,18,0.05); }
+    .output-icon { font-size:36px; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p  { font-size:.9rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── ERRORI ─── */
+    .errori-list { display:flex; flex-direction:column; gap:16px; }
+    .err-item {
+      background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2);
+      border-left:4px solid #ef4444;
+      border-radius:12px; padding:20px 24px;
+    }
+    .err-title { font-size:.95rem; font-weight:700; color:#fca5a5; margin-bottom:6px; }
+    .err-desc  { font-size:.875rem; color:var(--text-mut); line-height:1.5; }
+
+    /* ─── STEP ─── */
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:20px; padding:32px;
+    }
+    .step-header { display:flex; align-items:flex-start; gap:20px; margin-bottom:20px; }
+    .step-number {
+      flex-shrink:0; width:56px; height:56px; border-radius:14px;
+      background:var(--accent); color:#fff;
+      font-size:1.3rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .step-title { font-size:1.15rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .step-time  { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.9rem; color:var(--text-mut); line-height:1.6; margin-bottom:20px; }
+    .action-list { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
+    .action-item {
+      display:flex; gap:14px; align-items:flex-start;
+      background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px;
+      font-size:.9rem;
+    }
+    .action-arrow { color:var(--accent); font-weight:800; flex-shrink:0; }
+    .callout {
+      border-radius:12px; padding:16px 20px;
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:.875rem; line-height:1.5;
+    }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#93c5fd; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#86efac; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fcd34d; }
+    .callout.danger  { background:rgba(239,68,68,0.1);  border:1px solid rgba(239,68,68,0.25);  color:#fca5a5; }
+    .callout-icon    { flex-shrink:0; font-size:1.1rem; }
+
+    /* ─── TOOL ─── */
+    .tool-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+    .tool-card {
+      background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px; padding:24px;
+    }
+    .tool-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .tool-name   { font-size:1rem; font-weight:700; color:var(--text); }
+    .tool-badge  { font-size:11px; font-weight:700; color:#fff; border-radius:20px; padding:3px 10px; }
+    .tool-desc   { font-size:.875rem; color:var(--text-mut); line-height:1.5; margin-bottom:14px; }
+    .tool-link   {
+      font-size:.85rem; font-weight:700; color:var(--accent);
+      text-decoration:none; border:1px solid rgba(212,78,18,0.3);
+      border-radius:8px; padding:6px 14px; display:inline-block;
+    }
+    .tool-link:hover { background:rgba(212,78,18,0.1); }
+
+    /* ─── CTA ─── */
+    .cta-block {
+      margin:64px 0 0;
+      background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3);
+      border-radius:24px; padding:48px 40px; text-align:center;
+    }
+    .cta-block h2 {
+      font-size:clamp(1.5rem,4vw,2.2rem); font-weight:900;
+      color:var(--text); margin-bottom:16px;
+    }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:480px; margin:0 auto 32px; }
+    .cta-btn {
+      display:inline-block; background:var(--accent); color:#fff;
+      font-size:1rem; font-weight:800; text-transform:uppercase; letter-spacing:1.5px;
+      padding:16px 40px; border-radius:12px; text-decoration:none;
+      transition:background .2s, transform .15s;
+    }
+    .cta-btn:hover { background:#b83a0a; transform:translateY(-2px); }
+    .keyword-tag {
+      display:inline-block; background:rgba(212,78,18,0.15); border:1px solid rgba(212,78,18,0.3);
+      color:var(--accent); font-size:.8rem; font-weight:700; letter-spacing:2px;
+      border-radius:20px; padding:5px 14px; margin-top:20px;
+      text-transform:uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      text-align:center; padding:40px 24px; margin-top:56px;
+      border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent); margin-bottom:8px; }
+    .footer-sub   { font-size:.8rem; color:var(--text-mut); }
+
+    /* ─── ANIMATION ─── */
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity .5s ease,transform .5s ease; }
+    .fade-in.visible { opacity:1; transform:none; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="brand-badge">
+      <div class="brand-dot"></div>
+      Cantieri Hub · Guida Pratica
+    </div>
+    <h1>Analisi prezzi: costruire un prezzo che regge in cantiere</h1>
+    <p class="sub">Cosa c'è dentro il prezzo di una voce d'opera, come si ricostruisce quando il prezzario non ce l'ha, e come si difende davanti al committente.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">⏱ Tempo: <span>9&nbsp;minuti</span></div>
+      <div class="meta-pill">📐 Settore: <span>Edilizia</span></div>
+      <div class="meta-pill">🤖 Powered by: <span>AI</span></div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- COSA OTTIENI -->
+    <section>
+      <div class="section-label">Risultati concreti</div>
+      <h2 class="section-title">Cosa ottieni da questa guida</h2>
+      <div class="output-grid">
+        <div class="output-card fade-in">
+          <div class="output-icon">🧱</div>
+          <h4>Sai da dove viene ogni euro</h4>
+          <p>Impari a scomporre una voce nelle sue cinque parti: materiali, manodopera, noli e attrezzature, spese generali e oneri della sicurezza. Quando il committente contesta il prezzo, gli mostri il ragionamento invece di difendere un numero.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">🧭</div>
+          <h4>Le voci fuori prezzario non ti bloccano più</h4>
+          <p>Capisci come ricostruire da zero il prezzo di una lavorazione che sul prezzario regionale non esiste, invece di prenderne una simile e sperare che assomigli abbastanza.</p>
+        </div>
+        <div class="output-card fade-in">
+          <div class="output-icon">📊</div>
+          <h4>Prezzi tarati sul cantiere vero</h4>
+          <p>Vedi come lo stesso identico lavoro cambi costo tra un piano terra e un quinto piano senza ascensore, e come tenerne conto senza andare a sentimento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ERRORI -->
+    <section>
+      <div class="section-label">Trappole comuni</div>
+      <h2 class="section-title">Gli errori che ti erodono il margine</h2>
+      <div class="errori-list">
+        <div class="err-item fade-in">
+          <div class="err-title">Prendere il prezzo dal prezzario senza guardarci dentro</div>
+          <div class="err-desc">Il prezzario è una media costruita su condizioni standard. Il tuo cantiere non è standard quasi mai. Se prendi la voce così com'è, stai accettando le ipotesi di qualcun altro su manodopera, trasporti e accessibilità: a volte ti conviene, a volte ci rimetti, e non sai mai quale delle due.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Mettere spese generali e utile a percentuale fissa</div>
+          <div class="err-desc">Il classico 15 e 10 applicato a tutto è comodo ma non descrive niente. Su una voce a forte incidenza di materiale gonfia il prezzo e ti fa perdere la gara; su una lavorazione tutta manodopera non copre nemmeno il costo della struttura. La percentuale va ribaltata sulla voce, non spalmata a occhi chiusi.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Trattare gli oneri della sicurezza come un arrotondamento</div>
+          <div class="err-desc">La sicurezza va esposta separatamente perché il computo lo richiede e perché è la prima cosa che un committente pubblico verifica. Annegarla dentro il prezzo unitario ti espone in gara e ti toglie l'unica voce che nessuno può chiederti di ribassare.</div>
+        </div>
+        <div class="err-item fade-in">
+          <div class="err-title">Usare il prezzo dell'ultimo lavoro perché era simile</div>
+          <div class="err-desc">Simile non vuol dire uguale. Cambiano il piano, la distanza dal deposito, la quantità in gioco, i tempi imposti dal committente. Sono le stesse lavorazioni ma non è lo stesso costo: il margine si perde quasi sempre qui, in silenzio.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP -->
+    <section>
+      <div class="section-label">Guida passo dopo passo</div>
+      <h2 class="section-title">Come farlo adesso</h2>
+      <div class="steps-list">
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">01</div>
+            <div>
+              <h3 class="step-title">Definisci cosa comprende davvero la voce</h3>
+              <div class="step-time">⏱ 2&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Prima di scomporre un prezzo devi sapere che cosa stai prezzando. La stessa lavorazione ha tre prezzi diversi a seconda di cosa ti stai impegnando a fare, ed è l'ambiguità qui che genera le contestazioni dopo.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Stabilisci se stai quotando solo la posa, la fornitura con posa, oppure un subappalto: cambia tutto, dal materiale alla responsabilità.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Scrivi l'unità di misura e cosa ci sta dentro: al metro quadro di intonaco appartiene anche la rasatura, oppure no?</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Segna le lavorazioni accessorie che dai per scontate: pulizia, tiro in alto, protezione delle superfici. Se non sono nella voce, vanno in una voce loro.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Se il lavoro nasce da un capitolato, riporta la dicitura esatta del committente: sarà il testo su cui si discuterà in caso di riserva.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">02</div>
+            <div>
+              <h3 class="step-title">Scomponi il prezzo nelle sue cinque parti</h3>
+              <div class="step-time">⏱ 4&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Un prezzo che regge non è un numero, è una somma di cose che puoi mostrare. Le cinque componenti sono sempre le stesse, in ogni lavorazione, dal piccolo intervento alla grande opera.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Materiali: quantità effettiva per unità di misura, con lo sfrido realistico. Non il consumo teorico da scheda tecnica.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Manodopera: ore necessarie e costo orario della squadra che manderai davvero, non della squadra ideale.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Noli e attrezzature: mezzi, ponteggi e attrezzatura di cantiere, con la quota di utile d'impresa.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Spese generali: la quota dei costi di struttura ribaltata su questa voce, in proporzione a quanto pesa.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Sicurezza: gli oneri esposti separatamente, come richiede il computo.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">03</div>
+            <div>
+              <h3 class="step-title">Tara il prezzo sul cantiere che hai davanti</h3>
+              <div class="step-time">⏱ 3&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Qui si separa un prezzo copiato da un prezzo tuo. Le stesse cinque componenti si comportano in modo diverso a seconda di dove e come lavori, e sono variabili che conosci già: basta metterle nel conto invece che nella memoria.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Dimensione del cantiere: la stessa lavorazione su 20 metri quadri e su 2.000 non ha la stessa incidenza di allestimento.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Piano e accessibilità: quarto piano senza ascensore significa ore di movimentazione che qualcuno deve pagare.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Distanza e trasporto: il costo di portare materiale e mezzi fin lì, e di riportarli via.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Urgenza: tempi stretti significano squadre in più o straordinari, e vanno dentro il prezzo, non nel tuo margine.</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">04</div>
+            <div>
+              <h3 class="step-title">Verifica il ragionamento e correggi quello che non torna</h3>
+              <div class="step-time">⏱ 3&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Il valore di un'analisi prezzi non è il totale che produce: è il fatto che ogni riga si può discutere. Se una componente non ti convince, la cambi e il totale si ricalcola. Il tuo mestiere entra qui, dove sai cose che nessun listino sa.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Controlla le ore di manodopera con l'esperienza tua: è la componente che sbaglia più spesso chi non è stato in cantiere.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Verifica i prezzi dei materiali con i tuoi fornitori abituali: sono i tuoi sconti, non quelli medi di mercato.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Se una voce non ti torna, modifica la singola componente invece di ritoccare il totale a occhio: il totale ritoccato non lo sai più spiegare.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Quando devi analizzare un intero blocco di voci, lavora in batch invece che una alla volta, poi rifinisci le tre o quattro che pesano di più.</div>
+            </div>
+          </div>
+          <div class="callout success">
+            <span class="callout-icon">✅</span>
+            <span>La voce che sul prezzario regionale non esiste non è l'eccezione fastidiosa: è esattamente il caso in cui l'analisi prezzi vale di più. La ricostruisci da zero, componente per componente, e ottieni un prezzo che puoi difendere riga per riga.</span>
+          </div>
+        </div>
+        <div class="step-card fade-in">
+          <div class="step-header">
+            <div class="step-number">05</div>
+            <div>
+              <h3 class="step-title">Esporta l'analisi e usala come documento</h3>
+              <div class="step-time">⏱ 2&nbsp;minuti</div>
+            </div>
+          </div>
+          <p class="step-intro">Un'analisi prezzi che resta nel tuo computer serve solo a te. Portata fuori, diventa lo strumento che chiude le discussioni prima che comincino, in gara come col privato.</p>
+          <div class="action-list">
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Esporta in PDF o in Excel con il logo e i colori della tua azienda: è un allegato che parla di te prima ancora dei numeri.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Allega l'analisi al preventivo quando il committente è tecnico: dimostra come sei arrivato al prezzo e sposta la discussione dal quanto al come.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Tieni le analisi delle voci che ripeti più spesso: diventano il tuo prezzario interno, costruito sui tuoi costi reali.</div>
+            </div>
+            <div class="action-item">
+              <div class="action-arrow">→</div>
+              <div>Aggiorna le voci ricorrenti almeno a ogni cambio di listino dei fornitori: un prezzario interno vecchio è pericoloso quanto uno regionale vecchio.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOOL -->
+    <section>
+      <div class="section-label">Strumenti consigliati</div>
+      <h2 class="section-title">Tool e risorse</h2>
+      <div class="tool-grid">
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Analisi Prezzi AI · Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Genera la scomposizione di costo di qualsiasi voce d'opera: materiali, manodopera, noli, spese generali e sicurezza. Ogni componente è modificabile e il totale si ricalcola in tempo reale. Ricostruisce anche le voci che sul prezzario regionale non esistono, con il ragionamento in chiaro.</p>
+          <a class="tool-link" href="https://cantierihub.com/analisi-prezzi?utm_source=guida&utm_medium=lead-magnet&utm_campaign=analisi-prezzi-costruire-un-prezzo-che-regge&utm_content=tool-analisi-prezzi" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="tool-header">
+            <span class="tool-name">Computatore AI · Cantieri Hub</span>
+            <span class="tool-badge" style="background:#D44E12">PRO</span>
+          </div>
+          <p class="tool-desc">Genera il computo metrico da una descrizione, dalle foto del sopralluogo o da un capitolato. È il passo prima dell'analisi prezzi: prima le voci e le quantità, poi il prezzo di ciascuna.</p>
+          <a class="tool-link" href="https://cantierihub.com/computatore?utm_source=guida&utm_medium=lead-magnet&utm_campaign=analisi-prezzi-costruire-un-prezzo-che-regge&utm_content=tool-computatore" target="_blank" rel="noopener">
+            Apri tool →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block fade-in">
+      <h2>Vuoi vederla sulle tue voci?</h2>
+      <p>Porta due o tre voci che ti hanno dato problemi: una fuori prezzario, una che hai perso in gara, una che sospetti ti stia mangiando il margine. In una demo gratuita di 30&nbsp;minuti le scomponiamo insieme e guardi da dove esce il prezzo.</p>
+      <a class="cta-btn" href="https://cantierihub.com/analisi-prezzi?utm_source=guida&utm_medium=lead-magnet&utm_campaign=analisi-prezzi-costruire-un-prezzo-che-regge&utm_content=cta-finale" target="_blank" rel="noopener">
+        Scopri l'Analisi Prezzi AI →
+      </a>
+      <br>
+    </div>
+
+    <!-- FOOTER -->
+
+
+    <div class="footer">
+      <div class="footer-brand">Cantieri Hub</div>
+      <div class="footer-sub">"10 preventivi nel tempo di uno." · cantierihub.com</div>
+    </div>
+
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
+      {threshold:0.1}
+    );
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
