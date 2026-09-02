@@ -1,5 +1,12 @@
 {
   "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/guide/due-imprese-edili-a-torino-stesso-quartiere-stesso-tipo-di-l.html",
+      "destination": "/guide/preventivo-che-chiude-far-dire-si-al-cliente.html",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/guide/(.*)",
