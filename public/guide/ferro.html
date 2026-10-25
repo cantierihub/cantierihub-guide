@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Il prezzo del ferro si decide a Bruxelles: cosa cambia e come aggiornare i preventivi con l&#x27;intelligenza artificiale · Cantieri Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.70);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; min-height:100vh; }
+    a { color:var(--accent2); }
+
+    .hero { background:linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%); border-bottom:1px solid rgba(212,78,18,0.2); padding:48px 24px 56px; text-align:center; }
+    .brand-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px; font-size:13px; font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:2px; }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 { font-size:clamp(1.9rem,5vw,3rem); font-weight:900; color:var(--text); line-height:1.12; margin:0 auto 20px; max-width:860px; }
+    .hero h1 em { color:var(--accent2); font-style:normal; }
+    .hero .sub { font-size:1.08rem; color:var(--text-mut); max-width:640px; margin:0 auto 32px; }
+    .hero-meta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .meta-pill { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:8px 18px; font-size:13px; font-weight:600; color:var(--text-mut); }
+    .meta-pill span { color:var(--text); }
+
+    .container { max-width:820px; margin:0 auto; padding:0 20px; }
+    section { padding:56px 0 0; }
+    .section-label { font-size:11px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:4px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--text); line-height:1.2; margin-bottom:28px; }
+    .section-intro { font-size:.98rem; color:var(--text-mut); margin:-12px 0 28px; }
+
+    .output-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .output-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:26px; }
+    .output-num { width:34px; height:34px; border-radius:10px; background:rgba(212,78,18,0.15); color:var(--accent2); font-weight:800;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p { font-size:.92rem; color:var(--text-mut); line-height:1.55; }
+
+    .testo p { font-size:.98rem; color:var(--text-mut); margin-bottom:16px; }
+    .testo p strong { color:var(--text); }
+    .box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-left:4px solid var(--accent); border-radius:14px; padding:20px 22px; margin:0 0 16px; }
+    .box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .box p { font-size:.94rem; color:var(--text-mut); margin:0; }
+
+    .parte-titolo { font-size:clamp(1.25rem,3vw,1.6rem); font-weight:800; margin:48px 0 10px; }
+    .parte-titolo:first-child { margin-top:0; }
+    .parte-intro { font-size:.98rem; color:var(--text-mut); margin-bottom:24px; }
+
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; }
+    .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:16px; }
+    .step-number { flex-shrink:0; width:52px; height:52px; border-radius:14px; background:var(--accent); color:#fff; font-size:1.2rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; }
+    .step-title { font-size:1.12rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.3; }
+    .step-time { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.95rem; color:var(--text-mut); line-height:1.65; margin-bottom:16px; }
+    .action-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .action-item { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; font-size:.92rem; }
+    .action-arrow { color:var(--accent2); font-weight:800; flex-shrink:0; }
+
+    .prompt { position:relative; background:#0d1526; border:1px solid rgba(249,115,22,0.35); border-radius:14px; margin:0 0 16px; overflow:hidden; }
+    .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px 10px 18px;
+      background:rgba(249,115,22,0.10); border-bottom:1px solid rgba(249,115,22,0.25); }
+    .prompt-label { font-size:12px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:1.5px; }
+    .copia { font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; }
+    .copia.fatto { background:#15803d; }
+    .prompt pre { white-space:pre-wrap; word-wrap:break-word; font-family:inherit; font-size:.9rem; line-height:1.6; color:#e2e8f0; padding:16px 18px 18px; margin:0; }
+
+    .callout { border-radius:12px; padding:14px 18px; font-size:.9rem; line-height:1.55; margin:0 0 4px; }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#bfdbfe; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#bbf7d0; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fde68a; }
+
+    .errori-list { display:flex; flex-direction:column; gap:14px; }
+    .err-item { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-left:4px solid #ef4444; border-radius:12px; padding:18px 22px; }
+    .err-title { font-size:.98rem; font-weight:700; color:#fca5a5; margin-bottom:4px; }
+    .err-desc { font-size:.9rem; color:var(--text-mut); line-height:1.55; }
+
+    .fonti { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .fonti li { font-size:.86rem; color:var(--text-mut); background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; }
+    .fonti a { word-break:break-word; }
+
+    .cta-block { margin:64px 0 0; background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3); border-radius:24px; padding:44px 32px; text-align:center; }
+    .cta-block h2 { font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--text); margin-bottom:14px; line-height:1.2; }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:520px; margin:0 auto 28px; }
+    .cta-btn { display:inline-block; background:var(--accent); color:#fff; font-size:1rem; font-weight:800; padding:16px 32px; border-radius:12px; text-decoration:none; }
+    .cta-btn:hover { background:#b83a0a; }
+
+    .footer { text-align:center; padding:40px 24px; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+    .footer-sub { font-size:.8rem; color:var(--text-mut); }
+    @media (max-width:520px) { .step-card { padding:22px 18px; } .step-number { width:44px; height:44px; font-size:1.05rem; } .cta-block { padding:36px 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="brand-badge"><div class="brand-dot"></div>Cantieri Hub · Guida gratuita</div>
+    <h1>Il prezzo del ferro si decide a Bruxelles: <em>cosa cambia e come aggiornare i preventivi</em></h1>
+    <p class="sub">Le due regole europee che pesano sull&#x27;acciaio che arriva da fuori, spiegate semplici. E come far trovare all&#x27;intelligenza artificiale il ferro nei tuoi preventivi e aggiornarlo con il listino nuovo, in un minuto.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Tempo: <span>8 minuti</span></div>
+      <div class="meta-pill">Ti serve: <span>ChatGPT o un&#x27;altra intelligenza artificiale, il listino del fornitore</span></div>
+      <div class="meta-pill">Per: <span>imprese edili e studi tecnici</span></div>
+    </div>
+  </div>
+  <div class="container"><section><div class="section-label">Cosa ottieni</div><h2 class="section-title">Alla fine di questa guida</h2><div class="output-grid"><div class="output-card"><div class="output-num">1</div><h4>Le regole in due minuti</h4><p>Cosa ha deciso l&#x27;Europa sull&#x27;acciaio che arriva da fuori, e da quando vale.</p></div><div class="output-card"><div class="output-num">2</div><h4>I preventivi aggiornati</h4><p>Tutte le voci con il ferro trovate e ricalcolate con il listino nuovo, con il prima e il dopo.</p></div><div class="output-card"><div class="output-num">3</div><h4>Il messaggio al cliente</h4><p>Come spiegare l&#x27;aggiornamento in poche righe, senza perdere la fiducia.</p></div></div></section><section><div class="section-label">Cosa cambia</div><h2 class="section-title">Le due regole europee sull&#x27;acciaio</h2><div class="testo"><div class="box"><h4>Dal 1° luglio 2026: meno acciaio estero senza dazio</h4><p>Con il regolamento (UE) 2026/1384 la quantità di acciaio che può entrare in Europa senza dazio scende di circa il 47% rispetto al 2024, e sopra quella quota il dazio sale al 50%. I prodotti coperti sono 30 categorie.</p></div><div class="box"><h4>Dal 1° gennaio 2026: si paga la CO2 contenuta nell&#x27;acciaio importato</h4><p>Con il CBAM (regolamento (UE) 2023/956) chi importa prodotti come acciaio, cemento e fertilizzanti deve essere autorizzato e paga le emissioni di CO2 contenute nei prodotti, acquistando certificati. L&#x27;applicazione è graduale e sarà completa nel 2034.</p></div><p><strong>Cosa vuol dire per te.</strong> Il prezzo del ferro, e di altri materiali che arrivano da fuori Europa, adesso dipende anche da queste regole. I listini dei fornitori possono cambiare più spesso, e ogni volta i preventivi già fatti vanno riaperti e riadattati. È un lavoro meccanico: lo può fare l&#x27;intelligenza artificiale, mentre tu decidi cosa proporre al cliente.</p></div></section><section><div class="section-label">La guida</div><h2 class="section-title">Come si fa, passo per passo</h2><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">01</div><div><h3 class="step-title">Fatti dare il listino nuovo</h3><div class="step-time">5 minuti</div></div></div><p class="step-intro">Chiedi al fornitore il listino aggiornato, in Excel o in PDF. Va bene anche la foto della pagina che ti interessa. Senza un prezzo di riferimento scritto, l&#x27;aggiornamento non si fa.</p></div><div class="step-card"><div class="step-header"><div class="step-number">02</div><div><h3 class="step-title">Metti listino e preventivi in un progetto</h3><div class="step-time">3 minuti</div></div></div><p class="step-intro">In ChatGPT crea un <strong>Progetto</strong> «Preventivi e listini» e carica il listino nuovo e i preventivi ancora aperti, in PDF o in Excel.</p><div class="callout warning">Se nei preventivi ci sono dati dei clienti, nelle impostazioni dei dati di ChatGPT puoi scegliere che le conversazioni non vengano usate per migliorare i modelli.</div></div><div class="step-card"><div class="step-header"><div class="step-number">03</div><div><h3 class="step-title">Trova il ferro in tutti i preventivi</h3><div class="step-time">1 minuto</div></div></div><p class="step-intro">Il ferro non sta solo nelle voci che si chiamano «ferro»: sta dentro il cemento armato, le reti, i profilati, le staffe, le voci composte. Fallo cercare tutto.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 1 · Trova il ferro</span><button class="copia" type="button">Copia</button></div><pre>Nei preventivi di questo progetto trova tutte le voci che contengono acciaio o ferro: tondino per cemento armato, rete elettrosaldata, profilati, lamiere, staffe, ferro lavorato, e anche le voci composte dove il ferro è una parte (per esempio un solaio o un pilastro in cemento armato).
+
+Per ogni voce dammi: preventivo, numero della voce, descrizione, quantità, unità di misura, prezzo attuale.
+Segnalami le voci composte, dove il ferro è solo una parte del prezzo.
+Non modificare niente per adesso.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">04</div><div><h3 class="step-title">Aggiorna i prezzi con il listino nuovo</h3><div class="step-time">1 minuto</div></div></div><p class="step-intro">Adesso ChatGPT ricalcola solo le voci con il ferro, e ti fa vedere il prima e il dopo.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 2 · Aggiorna</span><button class="copia" type="button">Copia</button></div><pre>Con il listino nuovo di [FORNITORE], aggiorna le voci che hai trovato.
+- Per le voci con solo ferro: usa il prezzo del listino [più il mio ricarico del ...%].
+- Per le voci composte: aggiorna solo la parte del ferro e mostrami il calcolo. Se non sai quanto ferro c&#x27;è nella voce, chiedimelo: non stimarlo.
+- Se un articolo non c&#x27;è nel listino, scrivi «non trovato».
+
+Fammi una tabella con: preventivo, voce, prezzo vecchio, prezzo nuovo, differenza.
+Poi il totale di ogni preventivo prima e dopo.
+Non toccare le altre voci.</pre></div><div class="callout success">Quando i numeri ti tornano, chiedi «riscrivimi il preventivo [nome] aggiornato» o «dammelo in Excel»: ti ritrovi il documento pronto da controllare.</div></div><div class="step-card"><div class="step-header"><div class="step-number">05</div><div><h3 class="step-title">Decidi tu cosa mandare al cliente</h3><div class="step-time">2 minuti</div></div></div><p class="step-intro">L&#x27;intelligenza artificiale ti dà i numeri, la scelta resta tua: aggiornare tutto, assorbire una parte, proporre una variante. Quando hai deciso, il messaggio lo prepara lei.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 3 · Il messaggio al cliente</span><button class="copia" type="button">Copia</button></div><pre>Prepara un messaggio per il cliente [nome], dando del [lei], sul preventivo [nome del preventivo].
+Spiega in modo semplice che il fornitore ha aggiornato il listino dell&#x27;acciaio [e il motivo, se te l&#x27;ha detto] e che la differenza sul suo lavoro è di [importo].
+Proponi [quello che hai deciso] e offri una telefonata per parlarne.
+Massimo sei righe, tono cortese e chiaro, niente parole tecniche.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">06</div><div><h3 class="step-title">Per i prossimi preventivi</h3><div class="step-time">una volta sola</div></div></div><p class="step-intro">Due abitudini che proteggono il margine quando i prezzi si muovono spesso.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Scrivi sempre per quanti giorni vale il preventivo.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Valuta con il tuo consulente una clausola di aggiornamento del prezzo per i materiali che cambiano di più.</span></div></div></div></div></section><section><div class="section-label">Attenzione</div><h2 class="section-title">Gli errori da evitare</h2><div class="errori-list"><div class="err-item"><div class="err-title">Cercare solo la parola «ferro»</div><div class="err-desc">Il ferro sta anche dentro le voci composte. Se non lo cerchi lì, il preventivo resta sotto.</div></div><div class="err-item"><div class="err-title">Lasciare che stimi le quantità</div><div class="err-desc">Se l&#x27;intelligenza artificiale non sa quanto ferro c&#x27;è in una voce, deve chiederlo a te, non indovinarlo.</div></div><div class="err-item"><div class="err-title">Mandare il preventivo senza rileggerlo</div><div class="err-desc">Controlla almeno le voci più grandi prima di inviare.</div></div><div class="err-item"><div class="err-title">Aspettare che sia il cliente a chiedere</div><div class="err-desc">Spiegare tu l&#x27;aggiornamento, presto e con le ragioni, tiene la fiducia. Scoprirlo alla fattura no.</div></div></div></section><section><div class="section-label">Fonti</div><h2 class="section-title">Dove abbiamo preso le informazioni</h2><ul class="fonti"><li>Commissione europea, Access2Markets, 30 giugno 2026: le nuove misure di salvaguardia sulle importazioni di acciaio (regolamento (UE) 2026/1384)<br><a href="https://trade.ec.europa.eu/access-to-markets/en/news/new-eu-safeguards-steel-imports-third-countries" target="_blank" rel="noopener">https://trade.ec.europa.eu/access-to-markets/en/news/new-eu-safeguards-steel-imports-third-countries</a></li><li>Commissione europea, Access2Markets, 28 gennaio 2026: l&#x27;inizio del periodo definitivo del CBAM (regolamento (UE) 2023/956)<br><a href="https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu" target="_blank" rel="noopener">https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu</a></li></ul></section>
+    <div class="cta-block">
+      <h2>Lo vuoi sui tuoi preventivi, con i tuoi prezzi e i tuoi listini?</h2>
+      <p>Noi di Cantieri Hub creiamo strumenti di intelligenza artificiale per le imprese edili: i listini nuovi letti appena arrivano e i preventivi aperti aggiornati da soli, con il prima e il dopo da approvare.</p>
+      <a class="cta-btn" href="https://cantierihub.com/demo?utm_source=guida&utm_medium=guida&utm_campaign=guida-ferro" target="_blank" rel="noopener">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-brand">Cantieri Hub</div>
+    <div class="footer-sub">Sistemi di intelligenza artificiale per imprese edili e studi tecnici · <a href="https://cantierihub.com">cantierihub.com</a></div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copia').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var testo = b.closest('.prompt').querySelector('pre').innerText;
+        var fatto = function () { b.textContent = 'Copiato'; b.classList.add('fatto'); setTimeout(function () { b.textContent = 'Copia'; b.classList.remove('fatto'); }, 2000); };
+        var vecchio = function () { var t = document.createElement('textarea'); t.value = testo; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (err) {} t.remove(); fatto(); };
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(testo).then(fatto, vecchio); } else { vecchio(); }
+      });
+    });
+  </script>
+</body>
+</html>

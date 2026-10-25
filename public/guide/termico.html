@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Conto Termico 3.0: come funziona e il prompt per il preventivo al cliente · Cantieri Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.70);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; min-height:100vh; }
+    a { color:var(--accent2); }
+
+    .hero { background:linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%); border-bottom:1px solid rgba(212,78,18,0.2); padding:48px 24px 56px; text-align:center; }
+    .brand-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px; font-size:13px; font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:2px; }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 { font-size:clamp(1.9rem,5vw,3rem); font-weight:900; color:var(--text); line-height:1.12; margin:0 auto 20px; max-width:860px; }
+    .hero h1 em { color:var(--accent2); font-style:normal; }
+    .hero .sub { font-size:1.08rem; color:var(--text-mut); max-width:640px; margin:0 auto 32px; }
+    .hero-meta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .meta-pill { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:8px 18px; font-size:13px; font-weight:600; color:var(--text-mut); }
+    .meta-pill span { color:var(--text); }
+
+    .container { max-width:820px; margin:0 auto; padding:0 20px; }
+    section { padding:56px 0 0; }
+    .section-label { font-size:11px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:4px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--text); line-height:1.2; margin-bottom:28px; }
+    .section-intro { font-size:.98rem; color:var(--text-mut); margin:-12px 0 28px; }
+
+    .output-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .output-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:26px; }
+    .output-num { width:34px; height:34px; border-radius:10px; background:rgba(212,78,18,0.15); color:var(--accent2); font-weight:800;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p { font-size:.92rem; color:var(--text-mut); line-height:1.55; }
+
+    .testo p { font-size:.98rem; color:var(--text-mut); margin-bottom:16px; }
+    .testo p strong { color:var(--text); }
+    .box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-left:4px solid var(--accent); border-radius:14px; padding:20px 22px; margin:0 0 16px; }
+    .box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .box p { font-size:.94rem; color:var(--text-mut); margin:0; }
+
+    .parte-titolo { font-size:clamp(1.25rem,3vw,1.6rem); font-weight:800; margin:48px 0 10px; }
+    .parte-titolo:first-child { margin-top:0; }
+    .parte-intro { font-size:.98rem; color:var(--text-mut); margin-bottom:24px; }
+
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; }
+    .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:16px; }
+    .step-number { flex-shrink:0; width:52px; height:52px; border-radius:14px; background:var(--accent); color:#fff; font-size:1.2rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; }
+    .step-title { font-size:1.12rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.3; }
+    .step-time { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.95rem; color:var(--text-mut); line-height:1.65; margin-bottom:16px; }
+    .action-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .action-item { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; font-size:.92rem; }
+    .action-arrow { color:var(--accent2); font-weight:800; flex-shrink:0; }
+
+    .prompt { position:relative; background:#0d1526; border:1px solid rgba(249,115,22,0.35); border-radius:14px; margin:0 0 16px; overflow:hidden; }
+    .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px 10px 18px;
+      background:rgba(249,115,22,0.10); border-bottom:1px solid rgba(249,115,22,0.25); }
+    .prompt-label { font-size:12px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:1.5px; }
+    .copia { font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; }
+    .copia.fatto { background:#15803d; }
+    .prompt pre { white-space:pre-wrap; word-wrap:break-word; font-family:inherit; font-size:.9rem; line-height:1.6; color:#e2e8f0; padding:16px 18px 18px; margin:0; }
+
+    .callout { border-radius:12px; padding:14px 18px; font-size:.9rem; line-height:1.55; margin:0 0 4px; }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#bfdbfe; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#bbf7d0; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fde68a; }
+
+    .errori-list { display:flex; flex-direction:column; gap:14px; }
+    .err-item { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-left:4px solid #ef4444; border-radius:12px; padding:18px 22px; }
+    .err-title { font-size:.98rem; font-weight:700; color:#fca5a5; margin-bottom:4px; }
+    .err-desc { font-size:.9rem; color:var(--text-mut); line-height:1.55; }
+
+    .fonti { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .fonti li { font-size:.86rem; color:var(--text-mut); background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; }
+    .fonti a { word-break:break-word; }
+
+    .cta-block { margin:64px 0 0; background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3); border-radius:24px; padding:44px 32px; text-align:center; }
+    .cta-block h2 { font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--text); margin-bottom:14px; line-height:1.2; }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:520px; margin:0 auto 28px; }
+    .cta-btn { display:inline-block; background:var(--accent); color:#fff; font-size:1rem; font-weight:800; padding:16px 32px; border-radius:12px; text-decoration:none; }
+    .cta-btn:hover { background:#b83a0a; }
+
+    .footer { text-align:center; padding:40px 24px; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+    .footer-sub { font-size:.8rem; color:var(--text-mut); }
+    @media (max-width:520px) { .step-card { padding:22px 18px; } .step-number { width:44px; height:44px; font-size:1.05rem; } .cta-block { padding:36px 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="brand-badge"><div class="brand-dot"></div>Cantieri Hub · Guida gratuita</div>
+    <h1>Conto Termico 3.0: <em>come funziona e il prompt per il preventivo al cliente</em></h1>
+    <p class="sub">Pompe di calore e solare termico: il contributo del GSE fino al 65% delle spese ammissibili, il mandato all&#x27;incasso che permette all&#x27;impresa di incassarlo, e il prompt per scrivere al cliente quanto paga lui.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Tempo: <span>9 minuti</span></div>
+      <div class="meta-pill">Ti serve: <span>ChatGPT, anche gratuito, e la scheda tecnica dell&#x27;impianto</span></div>
+      <div class="meta-pill">Per: <span>imprese edili e studi tecnici</span></div>
+    </div>
+  </div>
+  <div class="container"><section><div class="section-label">Cosa ottieni</div><h2 class="section-title">Alla fine di questa guida</h2><div class="output-grid"><div class="output-card"><div class="output-num">1</div><h4>Le regole in una pagina</h4><p>Cosa copre il Conto Termico 3.0, chi fa la domanda, entro quando e come arriva il contributo.</p></div><div class="output-card"><div class="output-num">2</div><h4>Il preventivo con la quota del cliente</h4><p>Totale, contributo stimato e quanto paga il cliente, scritti in modo che li capisca.</p></div><div class="output-card"><div class="output-num">3</div><h4>Il messaggio per spiegarlo</h4><p>Due righe su WhatsApp per far capire al cliente il vantaggio, senza promettere cifre che non sono sicure.</p></div></div></section><section><div class="section-label">Come funziona</div><h2 class="section-title">Il Conto Termico 3.0 in breve</h2><div class="testo"><div class="box"><h4>Non è una detrazione: è un contributo</h4><p>Il Conto Termico 3.0 non si scarica dalle tasse: è un contributo in denaro che il GSE paga con bonifico, fino a un massimo del 65% delle spese ammissibili. Ogni anno ci sono 900 milioni di euro: 500 per i privati, di cui 150 per le imprese, e 400 per la pubblica amministrazione.</p></div><div class="box"><h4>Pompe di calore e solare termico: il 65% non è della fattura</h4><p>Per questi interventi il 65% si applica ai massimali calcolati in base alle caratteristiche tecniche dell&#x27;impianto: la producibilità e la prestazione stagionale per le pompe di calore, la superficie dei pannelli per il solare termico. Quindi il contributo dipende dall&#x27;impianto, non dal prezzo che fai. Il GSE pubblica anche il catalogo degli apparecchi prequalificati: controlla se l&#x27;apparecchio che installi c&#x27;è.</p></div><div class="box"><h4>Chi fa la domanda e entro quando</h4><p>La domanda la presenta il Soggetto Responsabile, cioè chi sostiene la spesa: di solito il cliente. Per un privato è un accesso diretto, a lavori finiti, entro 90 giorni dalla conclusione dell&#x27;intervento: dopo, la domanda non è ammissibile. Il cliente può delegare un altro soggetto per compilare la domanda sul Portaltermico. Le imprese che chiedono il contributo per sé devono invece mandare una richiesta preliminare prima di iniziare i lavori.</p></div><div class="box"><h4>Come e quando arriva il contributo</h4><p>Fino a 15.000 euro il GSE paga in un&#x27;unica rata; sopra, in rate annuali. Il pagamento arriva entro l&#x27;ultimo giorno del mese che segue il bimestre in cui la scheda-contratto viene perfezionata.</p></div><div class="box"><h4>Il mandato irrevocabile all&#x27;incasso</h4><p>Il cliente può dare all&#x27;installatore o al fornitore il mandato a incassare il contributo netto. Le condizioni principali: domanda in accesso diretto; il mandato riguarda tutto il contributo; un solo mandatario; si usa il modello standard del Portaltermico, con il conto corrente dell&#x27;impresa. La fattura deve essere pari alle spese ammissibili indicate sul portale, il cliente paga con bonifico la parte restante, e bonifici più contributo netto devono fare esattamente l&#x27;importo della fattura.</p></div><p><strong>Cosa vuol dire per te.</strong> Con il mandato puoi proporre al cliente di pagare solo la sua parte, mentre il contributo lo incassi tu dal GSE. Ricordati che quella parte arriva dopo: mettila nei conti dell&#x27;impresa. E prima di proporlo, controlla sul sito del GSE che il portale sia aperto: il 13 aprile 2026 è stato riaperto dopo una sospensione.</p></div></section><section><div class="section-label">La guida</div><h2 class="section-title">Come si fa, passo per passo</h2><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">01</div><div><h3 class="step-title">Controlla che l&#x27;intervento rientri</h3><div class="step-time">5 minuti</div></div></div><p class="step-intro">Prima di parlare di cifre, guarda la pagina «Tipologie di interventi» del Conto Termico 3.0 sul sito del GSE e verifica il caso del tuo cliente: tipo di edificio, impianto che sostituisci, impianto che installi.</p></div><div class="step-card"><div class="step-header"><div class="step-number">02</div><div><h3 class="step-title">Fatti dare il contributo stimato</h3><div class="step-time">dipende dall&#x27;impianto</div></div></div><p class="step-intro">Il contributo si calcola con le regole del GSE e i dati tecnici dell&#x27;impianto: potenza, prestazione stagionale, superficie dei pannelli, zona climatica. Fattelo calcolare dal tecnico o dal fornitore dell&#x27;apparecchio, oppure usa il catalogo del GSE se l&#x27;apparecchio è prequalificato.</p><div class="callout warning">Non chiedere all&#x27;intelligenza artificiale di inventarsi il contributo: le formule hanno troppe variabili. Il numero lo porti tu, lei ti aiuta a scrivere il preventivo e a spiegarlo.</div></div><div class="step-card"><div class="step-header"><div class="step-number">03</div><div><h3 class="step-title">Prepara il preventivo con la quota del cliente</h3><div class="step-time">2 minuti</div></div></div><p class="step-intro">Con il totale dei lavori e il contributo stimato, ChatGPT ti scrive il preventivo che il cliente capisce al primo colpo.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 1 · Il preventivo</span><button class="copia" type="button">Copia</button></div><pre>Prepara il testo di un preventivo per il cliente [Nome Cognome] per [l&#x27;installazione di una pompa di calore aria-acqua da ... kW che sostituisce la caldaia a gas], nella casa in [indirizzo, tipo di casa].
+
+Dati:
+- Totale dei lavori, IVA inclusa: [€ ...]
+- Contributo Conto Termico 3.0 stimato: [€ ...], calcolato da [tecnico / fornitore], da confermare dal GSE
+- Mandato irrevocabile all&#x27;incasso: sì. L&#x27;impresa incassa il contributo dal GSE, il cliente paga con bonifico la parte restante.
+
+Scrivi:
+1. Cosa installiamo, in parole semplici, in tre righe.
+2. Una tabella: totale dei lavori, contributo stimato, quota del cliente.
+3. Come e quando paga il cliente la sua quota.
+4. Cosa succede se il GSE riconosce un contributo diverso: [scrivi qui cosa hai deciso tu].
+5. I documenti che ci servono dal cliente.
+6. La frase: «Il contributo è stimato: l&#x27;importo esatto lo conferma il GSE dopo la domanda».
+Tono semplice, nessuna parola tecnica senza spiegarla. Non cambiare i numeri che ti ho dato.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">04</div><div><h3 class="step-title">Spiegalo al cliente in due righe</h3><div class="step-time">1 minuto</div></div></div><p class="step-intro">Prima del PDF, spesso serve un messaggio che faccia capire il vantaggio.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 2 · Il messaggio WhatsApp</span><button class="copia" type="button">Copia</button></div><pre>Scrivi un messaggio WhatsApp per il cliente [nome], dando del [lei]: in massimo cinque righe spiega che per la sua [pompa di calore] può usare il Conto Termico 3.0, che il contributo stimato è di [€ ...] e che, con il mandato all&#x27;incasso, lui paga solo [€ ...] e il resto lo incassiamo noi dal GSE.
+Aggiungi che l&#x27;importo esatto lo conferma il GSE e proponi di sentirci per i dettagli.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">05</div><div><h3 class="step-title">Segna le date che non si possono sbagliare</h3><div class="step-time">1 minuto</div></div></div><p class="step-intro">Le pratiche si perdono sulle date, non sui conti.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Per il cliente privato: la domanda entro <strong>90 giorni dalla fine dei lavori</strong>. Mettilo in calendario il giorno stesso della fine lavori.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Se la domanda la fa un&#x27;impresa per sé: la richiesta preliminare va mandata <strong>prima di iniziare</strong> i lavori.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Conserva i documenti dell&#x27;intervento: il GSE li può chiedere per tutta la durata dell&#x27;incentivo e per i cinque anni dopo l&#x27;ultimo pagamento.</span></div></div></div></div></section><section><div class="section-label">Attenzione</div><h2 class="section-title">Gli errori da evitare</h2><div class="errori-list"><div class="err-item"><div class="err-title">Chiamarlo detrazione</div><div class="err-desc">Il cliente capisce un&#x27;altra cosa. È un contributo che arriva con un bonifico del GSE.</div></div><div class="err-item"><div class="err-title">Promettere il 65% della fattura</div><div class="err-desc">Per pompe di calore e solare termico il contributo dipende dall&#x27;impianto. Prometti solo cifre calcolate, e scrivi che sono stime.</div></div><div class="err-item"><div class="err-title">Superare i 90 giorni</div><div class="err-desc">Dopo la fine lavori il tempo corre. Una domanda in ritardo non è ammissibile.</div></div><div class="err-item"><div class="err-title">Una fattura che non torna</div><div class="err-desc">Con il mandato, bonifici del cliente più contributo netto devono fare esattamente la fattura. Se non tornano, la domanda non passa.</div></div></div></section><section><div class="section-label">Fonti</div><h2 class="section-title">Dove abbiamo preso le informazioni</h2><ul class="fonti"><li>GSE, Conto Termico 3.0: cos&#x27;è, dotazione e percentuali<br><a href="https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico-3-0" target="_blank" rel="noopener">https://www.gse.it/servizi-per-te/efficienza-energetica/conto-termico-3-0</a></li><li>GSE, Conto Termico 3.0: come accedere (accesso diretto entro 90 giorni, richiesta preliminare per le imprese)<br><a href="https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Come-accedere.aspx" target="_blank" rel="noopener">https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Come-accedere.aspx</a></li><li>GSE, Conto Termico 3.0: tipologie di interventi<br><a href="https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Tipologie-di-interventi.aspx" target="_blank" rel="noopener">https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Tipologie-di-interventi.aspx</a></li><li>GSE, Conto Termico 3.0: chi può accedere (Soggetto Responsabile)<br><a href="https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Chi-puo-accedere.aspx" target="_blank" rel="noopener">https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/Chi-puo-accedere.aspx</a></li><li>GSE, Conto Termico 3.0: percentuali ed erogazione degli incentivi<br><a href="https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/PERCENTUALI-ED-EROGAZIONE-DEGLI-INCENTIVI.aspx" target="_blank" rel="noopener">https://www.gse.it/servizi-per-te_site/efficienza-energetica_site/conto-termico-3-0_site/Pagine/PERCENTUALI-ED-EROGAZIONE-DEGLI-INCENTIVI.aspx</a></li><li>GSE, Regole applicative del Conto Termico 3.0: erogazione (par. 4.3) e mandato irrevocabile all&#x27;incasso (par. 12.3)<br><a href="https://www.gse.it/documenti_site/Documenti%20GSE/Servizi%20per%20te/BIOMETANO/Regole%20e%20procedure/Regole_Applicative_CT_3_0.pdf" target="_blank" rel="noopener">https://www.gse.it/documenti_site/Documenti%20GSE/Servizi%20per%20te/BIOMETANO/Regole%20e%20procedure/Regole_Applicative_CT_3_0.pdf</a></li></ul></section>
+    <div class="cta-block">
+      <h2>Lo vuoi per tutti i tuoi preventivi?</h2>
+      <p>Noi di Cantieri Hub costruiamo sistemi di intelligenza artificiale per le imprese edili: preventivi con incentivi e quota del cliente pronti in pochi minuti, e la comunicazione con il cliente seguita dall&#x27;inizio alla fine.</p>
+      <a class="cta-btn" href="https://cantierihub.com/demo?utm_source=guida&utm_medium=guida&utm_campaign=guida-termico" target="_blank" rel="noopener">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-brand">Cantieri Hub</div>
+    <div class="footer-sub">Sistemi di intelligenza artificiale per imprese edili e studi tecnici · <a href="https://cantierihub.com">cantierihub.com</a></div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copia').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var testo = b.closest('.prompt').querySelector('pre').innerText;
+        var fatto = function () { b.textContent = 'Copiato'; b.classList.add('fatto'); setTimeout(function () { b.textContent = 'Copia'; b.classList.remove('fatto'); }, 2000); };
+        var vecchio = function () { var t = document.createElement('textarea'); t.value = testo; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (err) {} t.remove(); fatto(); };
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(testo).then(fatto, vecchio); } else { vecchio(); }
+      });
+    });
+  </script>
+</body>
+</html>
