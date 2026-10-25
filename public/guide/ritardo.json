@@ -1,0 +1,11 @@
+{
+  "slug": "ritardo",
+  "title": "Il cronoprogramma che si aggiorna con un messaggio",
+  "subtitle": "La guida e il prompt da passare a ChatGPT: ti costruisce il cronoprogramma del cantiere e, quando una lavorazione slitta, sposta le date di quelle dopo e ti prepara i messaggi per chi deve entrare.",
+  "description": "Un giorno di ritardo in cantiere non è mai solo un giorno: il massetto slitta, il piastrellista può solo la settimana dopo e tutte le date successive si spostano. In questa guida trovi come costruire il cronoprogramma con ChatGPT partendo dal tuo elenco di lavorazioni, come aggiornarlo con una riga quando qualcosa cambia e come farti preparare in un minuto i messaggi per le squadre e per il committente. Con i prompt pronti da copiare.",
+  "topic": "cantiere",
+  "cover_image": "",
+  "html_url": "https://guide.cantierihub.com/guide/ritardo.html",
+  "created_at": "2026-10-25T12:00:00Z",
+  "published": true
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Le cartelle del cantiere su Google Drive: il prompt per farle preparare a ChatGPT · Cantieri Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.70);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; min-height:100vh; }
+    a { color:var(--accent2); }
+
+    .hero { background:linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%); border-bottom:1px solid rgba(212,78,18,0.2); padding:48px 24px 56px; text-align:center; }
+    .brand-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px; font-size:13px; font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:2px; }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 { font-size:clamp(1.9rem,5vw,3rem); font-weight:900; color:var(--text); line-height:1.12; margin:0 auto 20px; max-width:860px; }
+    .hero h1 em { color:var(--accent2); font-style:normal; }
+    .hero .sub { font-size:1.08rem; color:var(--text-mut); max-width:640px; margin:0 auto 32px; }
+    .hero-meta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .meta-pill { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:8px 18px; font-size:13px; font-weight:600; color:var(--text-mut); }
+    .meta-pill span { color:var(--text); }
+
+    .container { max-width:820px; margin:0 auto; padding:0 20px; }
+    section { padding:56px 0 0; }
+    .section-label { font-size:11px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:4px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--text); line-height:1.2; margin-bottom:28px; }
+    .section-intro { font-size:.98rem; color:var(--text-mut); margin:-12px 0 28px; }
+
+    .output-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .output-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:26px; }
+    .output-num { width:34px; height:34px; border-radius:10px; background:rgba(212,78,18,0.15); color:var(--accent2); font-weight:800;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p { font-size:.92rem; color:var(--text-mut); line-height:1.55; }
+
+    .testo p { font-size:.98rem; color:var(--text-mut); margin-bottom:16px; }
+    .testo p strong { color:var(--text); }
+    .box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-left:4px solid var(--accent); border-radius:14px; padding:20px 22px; margin:0 0 16px; }
+    .box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .box p { font-size:.94rem; color:var(--text-mut); margin:0; }
+
+    .parte-titolo { font-size:clamp(1.25rem,3vw,1.6rem); font-weight:800; margin:48px 0 10px; }
+    .parte-titolo:first-child { margin-top:0; }
+    .parte-intro { font-size:.98rem; color:var(--text-mut); margin-bottom:24px; }
+
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; }
+    .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:16px; }
+    .step-number { flex-shrink:0; width:52px; height:52px; border-radius:14px; background:var(--accent); color:#fff; font-size:1.2rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; }
+    .step-title { font-size:1.12rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.3; }
+    .step-time { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.95rem; color:var(--text-mut); line-height:1.65; margin-bottom:16px; }
+    .action-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .action-item { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; font-size:.92rem; }
+    .action-arrow { color:var(--accent2); font-weight:800; flex-shrink:0; }
+
+    .prompt { position:relative; background:#0d1526; border:1px solid rgba(249,115,22,0.35); border-radius:14px; margin:0 0 16px; overflow:hidden; }
+    .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px 10px 18px;
+      background:rgba(249,115,22,0.10); border-bottom:1px solid rgba(249,115,22,0.25); }
+    .prompt-label { font-size:12px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:1.5px; }
+    .copia { font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; }
+    .copia.fatto { background:#15803d; }
+    .prompt pre { white-space:pre-wrap; word-wrap:break-word; font-family:inherit; font-size:.9rem; line-height:1.6; color:#e2e8f0; padding:16px 18px 18px; margin:0; }
+
+    .callout { border-radius:12px; padding:14px 18px; font-size:.9rem; line-height:1.55; margin:0 0 4px; }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#bfdbfe; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#bbf7d0; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fde68a; }
+
+    .errori-list { display:flex; flex-direction:column; gap:14px; }
+    .err-item { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-left:4px solid #ef4444; border-radius:12px; padding:18px 22px; }
+    .err-title { font-size:.98rem; font-weight:700; color:#fca5a5; margin-bottom:4px; }
+    .err-desc { font-size:.9rem; color:var(--text-mut); line-height:1.55; }
+
+    .fonti { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .fonti li { font-size:.86rem; color:var(--text-mut); background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; }
+    .fonti a { word-break:break-word; }
+
+    .cta-block { margin:64px 0 0; background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3); border-radius:24px; padding:44px 32px; text-align:center; }
+    .cta-block h2 { font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--text); margin-bottom:14px; line-height:1.2; }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:520px; margin:0 auto 28px; }
+    .cta-btn { display:inline-block; background:var(--accent); color:#fff; font-size:1rem; font-weight:800; padding:16px 32px; border-radius:12px; text-decoration:none; }
+    .cta-btn:hover { background:#b83a0a; }
+
+    .footer { text-align:center; padding:40px 24px; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+    .footer-sub { font-size:.8rem; color:var(--text-mut); }
+    @media (max-width:520px) { .step-card { padding:22px 18px; } .step-number { width:44px; height:44px; font-size:1.05rem; } .cta-block { padding:36px 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="brand-badge"><div class="brand-dot"></div>Cantieri Hub · Guida gratuita</div>
+    <h1>Le cartelle del cantiere su Google Drive: <em>il prompt per farle preparare a ChatGPT</em></h1>
+    <p class="sub">Un posto solo per foto, varianti, disegni e documenti, invece della chat di WhatsApp. ChatGPT ti disegna la struttura delle cartelle su misura per la tua impresa e ti aiuta a crearla in pochi minuti.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Tempo: <span>6 minuti</span></div>
+      <div class="meta-pill">Ti serve: <span>ChatGPT e Google Drive, anche gratuiti</span></div>
+      <div class="meta-pill">Per: <span>imprese edili e studi tecnici</span></div>
+    </div>
+  </div>
+  <div class="container"><section><div class="section-label">Cosa ottieni</div><h2 class="section-title">Alla fine di questa guida</h2><div class="output-grid"><div class="output-card"><div class="output-num">1</div><h4>La struttura su misura</h4><p>Le cartelle giuste per i tuoi lavori, numerate e sempre uguali da un cantiere all&#x27;altro.</p></div><div class="output-card"><div class="output-num">2</div><h4>La regola dei nomi</h4><p>Un modo unico di chiamare i file, così ognuno trova quello che cerca anche senza chiederlo a te.</p></div><div class="output-card"><div class="output-num">3</div><h4>Chi vede cosa</h4><p>Cosa condividere con la squadra, con il tecnico e con il committente, e con quali permessi.</p></div></div></section><section><div class="section-label">La guida</div><h2 class="section-title">Come si fa, passo per passo</h2><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">01</div><div><h3 class="step-title">Rispondi a cinque domande</h3><div class="step-time">2 minuti</div></div></div><p class="step-intro">La struttura giusta dipende dal tuo lavoro. Prima di aprire ChatGPT, pensa a queste cinque cose: le metti nel prompt.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Che lavori fai: ristrutturazioni, nuove costruzioni, impianti, lavori pubblici.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Quanti cantieri hai aperti insieme, di solito.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Chi deve mettere dentro i file: tu, l&#x27;ufficio, i capisquadra, il tecnico.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Chi deve solo guardare: il committente, il direttore lavori.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Da dove carichi i file: telefono in cantiere o computer in ufficio.</span></div></div></div><div class="step-card"><div class="step-header"><div class="step-number">02</div><div><h3 class="step-title">Fatti disegnare la struttura</h3><div class="step-time">1 minuto</div></div></div><p class="step-intro">Copia il prompt, completa le parti tra parentesi quadre e invialo.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 1 · La struttura delle cartelle</span><button class="copia" type="button">Copia</button></div><pre>Sono il titolare di un&#x27;impresa edile. Voglio smettere di tenere foto, varianti, disegni e documenti nelle chat di WhatsApp e organizzare tutto su Google Drive.
+
+La mia impresa:
+- Lavori che facciamo: [ristrutturazioni di appartamenti e villette]
+- Cantieri aperti insieme, di solito: [4]
+- Chi carica i file: [io, l&#x27;ufficio, i due capisquadra dal telefono]
+- Chi deve solo guardare: [il committente, il direttore lavori]
+
+Preparami:
+1. La struttura di una cartella «modello» da copiare per ogni cantiere: cartelle numerate (01, 02, 03...) con un nome corto e chiaro, e dentro le sottocartelle che servono. Per esempio contratto e preventivi, progetto e disegni, varianti, foto, documenti di cantiere, sicurezza, fornitori e subappalti, contabilità, fine lavori. Togli quello che a un&#x27;impresa come la mia non serve.
+2. La regola per il nome dei file, con 5 esempi (la data all&#x27;inizio, nel formato AAAA-MM-GG).
+3. Chi deve avere accesso a quali cartelle e con quale permesso (modifica o solo lettura).
+4. Le tre regole da mandare alla squadra su WhatsApp, in un messaggio corto.
+
+Scrivi la struttura come un elenco ad albero, facile da copiare.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">03</div><div><h3 class="step-title">Creala su Google Drive</h3><div class="step-time">10 minuti la prima volta</div></div></div><p class="step-intro">Su Google Drive dal browser le cartelle non si duplicano con un clic. Hai due strade.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>A mano, una volta sola</strong>: crei la cartella «Modello cantiere» con la struttura che ti ha dato ChatGPT. Per ogni cantiere nuovo ricrei le cartelle principali in cinque minuti.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Con un piccolo script</strong>, se vuoi farlo in un clic ogni volta: lo scrive ChatGPT con il prompt qui sotto, tu lo incolli su script.google.com e lo avvii. La prima volta Google ti chiede il permesso di usare il tuo Drive: è normale, lo script è tuo.</span></div></div><div class="prompt"><div class="prompt-head"><span class="prompt-label">Prompt 2 · Lo script per creare le cartelle</span><button class="copia" type="button">Copia</button></div><pre>Scrivimi uno script per Google Apps Script che crea su Google Drive una cartella con il nome che gli dico io (il nome del cantiere) e dentro tutta questa struttura di cartelle e sottocartelle:
+[incolla qui l&#x27;albero delle cartelle]
+
+Poi spiegami passo per passo, per chi non ha mai usato Apps Script:
+1. dove incollarlo su script.google.com,
+2. dove scrivo il nome del cantiere,
+3. come lo avvio e cosa fare quando Google chiede le autorizzazioni.</pre></div><div class="callout info">Se usi Google Drive anche sul computer (l&#x27;app Google Drive per desktop), puoi duplicare la cartella modello come una cartella qualsiasi, dal Finder o da Esplora file.</div></div><div class="step-card"><div class="step-header"><div class="step-number">04</div><div><h3 class="step-title">Condividi con le regole giuste</h3><div class="step-time">3 minuti per cantiere</div></div></div><p class="step-intro">Dalla cartella del cantiere, il tasto <strong>Condividi</strong>. Due regole semplici evitano quasi tutti i problemi.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>La squadra con permesso di <strong>modifica</strong> solo dove deve caricare: foto e documenti di cantiere.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Il committente con permesso di <strong>visualizzazione</strong>, e solo sulle cartelle che deve vedere.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Manda alla squadra il messaggio con le tre regole che ti ha preparato ChatGPT, e fissalo nel gruppo WhatsApp del cantiere.</span></div></div></div><div class="step-card"><div class="step-header"><div class="step-number">05</div><div><h3 class="step-title">Il passo dopo: ritrovare le cose chiedendole</h3><div class="step-time">facoltativo</div></div></div><p class="step-intro">Nei Progetti di ChatGPT, se il tuo piano lo prevede, puoi aggiungere come fonte il link di una cartella di Google Drive: ChatGPT può cercarci dentro quando gli chiedi qualcosa, per esempio le foto del massetto di marzo. Funziona bene proprio perché i file hanno nomi e cartelle ordinate.</p></div></div></section><section><div class="section-label">Attenzione</div><h2 class="section-title">Gli errori da evitare</h2><div class="errori-list"><div class="err-item"><div class="err-title">Cartelle diverse per ogni cantiere</div><div class="err-desc">Se ogni cantiere ha la sua struttura, nessuno trova niente. Il modello è sempre lo stesso.</div></div><div class="err-item"><div class="err-title">File chiamati «IMG_4471»</div><div class="err-desc">Senza la data e due parole nel nome, la cartella diventa un&#x27;altra chat di WhatsApp.</div></div><div class="err-item"><div class="err-title">Tutti possono modificare tutto</div><div class="err-desc">Un file cancellato per sbaglio da un telefono è un problema. Modifica solo dove serve.</div></div><div class="err-item"><div class="err-title">Continuare a mandare tutto anche su WhatsApp</div><div class="err-desc">Il gruppo serve per parlare, non per archiviare: le foto vanno nella cartella, nel gruppo basta dire «caricate».</div></div></div></section><section><div class="section-label">Fonti</div><h2 class="section-title">Dove abbiamo preso le informazioni</h2><ul class="fonti"><li>OpenAI, guida ai Progetti di ChatGPT (aggiungere link di Google Drive come fonti)<br><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt" target="_blank" rel="noopener">https://help.openai.com/en/articles/10169521-projects-in-chatgpt</a></li></ul></section>
+    <div class="cta-block">
+      <h2>Lo vuoi fatto su misura, con l&#x27;intelligenza artificiale dentro?</h2>
+      <p>Noi di Cantieri Hub costruiamo sistemi di intelligenza artificiale per imprese edili e studi tecnici: un posto solo per ogni cantiere, e l&#x27;intelligenza artificiale che ti ritrova foto e documenti quando glieli chiedi.</p>
+      <a class="cta-btn" href="https://cantierihub.com/demo?utm_source=guida&utm_medium=guida&utm_campaign=guida-cartella" target="_blank" rel="noopener">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-brand">Cantieri Hub</div>
+    <div class="footer-sub">Sistemi di intelligenza artificiale per imprese edili e studi tecnici · <a href="https://cantierihub.com">cantierihub.com</a></div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copia').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var testo = b.closest('.prompt').querySelector('pre').innerText;
+        var fatto = function () { b.textContent = 'Copiato'; b.classList.add('fatto'); setTimeout(function () { b.textContent = 'Copia'; b.classList.remove('fatto'); }, 2000); };
+        var vecchio = function () { var t = document.createElement('textarea'); t.value = testo; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (err) {} t.remove(); fatto(); };
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(testo).then(fatto, vecchio); } else { vecchio(); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Gli agenti di intelligenza artificiale per la tua impresa: uno per la squadra, uno per i clienti su WhatsApp · Cantieri Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.70);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; min-height:100vh; }
+    a { color:var(--accent2); }
+
+    .hero { background:linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%); border-bottom:1px solid rgba(212,78,18,0.2); padding:48px 24px 56px; text-align:center; }
+    .brand-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px; font-size:13px; font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:2px; }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 { font-size:clamp(1.9rem,5vw,3rem); font-weight:900; color:var(--text); line-height:1.12; margin:0 auto 20px; max-width:860px; }
+    .hero h1 em { color:var(--accent2); font-style:normal; }
+    .hero .sub { font-size:1.08rem; color:var(--text-mut); max-width:640px; margin:0 auto 32px; }
+    .hero-meta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .meta-pill { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:8px 18px; font-size:13px; font-weight:600; color:var(--text-mut); }
+    .meta-pill span { color:var(--text); }
+
+    .container { max-width:820px; margin:0 auto; padding:0 20px; }
+    section { padding:56px 0 0; }
+    .section-label { font-size:11px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:4px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--text); line-height:1.2; margin-bottom:28px; }
+    .section-intro { font-size:.98rem; color:var(--text-mut); margin:-12px 0 28px; }
+
+    .output-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .output-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:26px; }
+    .output-num { width:34px; height:34px; border-radius:10px; background:rgba(212,78,18,0.15); color:var(--accent2); font-weight:800;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p { font-size:.92rem; color:var(--text-mut); line-height:1.55; }
+
+    .testo p { font-size:.98rem; color:var(--text-mut); margin-bottom:16px; }
+    .testo p strong { color:var(--text); }
+    .box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-left:4px solid var(--accent); border-radius:14px; padding:20px 22px; margin:0 0 16px; }
+    .box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .box p { font-size:.94rem; color:var(--text-mut); margin:0; }
+
+    .parte-titolo { font-size:clamp(1.25rem,3vw,1.6rem); font-weight:800; margin:48px 0 10px; }
+    .parte-titolo:first-child { margin-top:0; }
+    .parte-intro { font-size:.98rem; color:var(--text-mut); margin-bottom:24px; }
+
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; }
+    .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:16px; }
+    .step-number { flex-shrink:0; width:52px; height:52px; border-radius:14px; background:var(--accent); color:#fff; font-size:1.2rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; }
+    .step-title { font-size:1.12rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.3; }
+    .step-time { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.95rem; color:var(--text-mut); line-height:1.65; margin-bottom:16px; }
+    .action-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .action-item { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; font-size:.92rem; }
+    .action-arrow { color:var(--accent2); font-weight:800; flex-shrink:0; }
+
+    .prompt { position:relative; background:#0d1526; border:1px solid rgba(249,115,22,0.35); border-radius:14px; margin:0 0 16px; overflow:hidden; }
+    .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px 10px 18px;
+      background:rgba(249,115,22,0.10); border-bottom:1px solid rgba(249,115,22,0.25); }
+    .prompt-label { font-size:12px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:1.5px; }
+    .copia { font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; }
+    .copia.fatto { background:#15803d; }
+    .prompt pre { white-space:pre-wrap; word-wrap:break-word; font-family:inherit; font-size:.9rem; line-height:1.6; color:#e2e8f0; padding:16px 18px 18px; margin:0; }
+
+    .callout { border-radius:12px; padding:14px 18px; font-size:.9rem; line-height:1.55; margin:0 0 4px; }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#bfdbfe; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#bbf7d0; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fde68a; }
+
+    .errori-list { display:flex; flex-direction:column; gap:14px; }
+    .err-item { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-left:4px solid #ef4444; border-radius:12px; padding:18px 22px; }
+    .err-title { font-size:.98rem; font-weight:700; color:#fca5a5; margin-bottom:4px; }
+    .err-desc { font-size:.9rem; color:var(--text-mut); line-height:1.55; }
+
+    .fonti { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .fonti li { font-size:.86rem; color:var(--text-mut); background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; }
+    .fonti a { word-break:break-word; }
+
+    .cta-block { margin:64px 0 0; background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3); border-radius:24px; padding:44px 32px; text-align:center; }
+    .cta-block h2 { font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--text); margin-bottom:14px; line-height:1.2; }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:520px; margin:0 auto 28px; }
+    .cta-btn { display:inline-block; background:var(--accent); color:#fff; font-size:1rem; font-weight:800; padding:16px 32px; border-radius:12px; text-decoration:none; }
+    .cta-btn:hover { background:#b83a0a; }
+
+    .footer { text-align:center; padding:40px 24px; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+    .footer-sub { font-size:.8rem; color:var(--text-mut); }
+    @media (max-width:520px) { .step-card { padding:22px 18px; } .step-number { width:44px; height:44px; font-size:1.05rem; } .cta-block { padding:36px 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="brand-badge"><div class="brand-dot"></div>Cantieri Hub · Guida gratuita</div>
+    <h1>Gli agenti di intelligenza artificiale per la tua impresa: <em>uno per la squadra, uno per i clienti su WhatsApp</em></h1>
+    <p class="sub">Come costruire da solo l&#x27;agente che risponde alla squadra con i tuoi documenti e le tue regole, e quello che risponde ai clienti su WhatsApp anche nel weekend. Con le istruzioni da copiare.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Tempo: <span>12 minuti</span></div>
+      <div class="meta-pill">Ti serve: <span>ChatGPT, anche gratuito, e WhatsApp Business</span></div>
+      <div class="meta-pill">Per: <span>imprese edili e studi tecnici</span></div>
+    </div>
+  </div>
+  <div class="container"><section><div class="section-label">Cosa ottieni</div><h2 class="section-title">Alla fine di questa guida</h2><div class="output-grid"><div class="output-card"><div class="output-num">1</div><h4>L&#x27;agente della squadra</h4><p>Risponde ai tuoi operai con i tuoi documenti: misure, materiali, orari. Quello che non sa, lo gira a te.</p></div><div class="output-card"><div class="output-num">2</div><h4>L&#x27;agente dei clienti</h4><p>Su WhatsApp risponde subito anche nel weekend, raccoglie le richieste di preventivo e non dà prezzi.</p></div><div class="output-card"><div class="output-num">3</div><h4>Le regole scritte da te</h4><p>Le istruzioni da copiare, con quello che l&#x27;agente deve fare e quello che non deve fare mai.</p></div></div></section><section><div class="section-label">La guida</div><h2 class="section-title">Come si fa, passo per passo</h2><h3 class="parte-titolo">Parte 1 · L&#x27;agente che risponde alla squadra</h3><p class="parte-intro">La misura del rivestimento, la colla, l&#x27;orario del fornitore: le risposte ci sono già, nel preventivo e nel cronoprogramma che hai fatto tu. Il problema è che le sai solo tu. Le metti in un progetto di ChatGPT e lo condividi con la squadra.</p><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">01</div><div><h3 class="step-title">Raccogli i documenti del cantiere</h3><div class="step-time">10 minuti</div></div></div><p class="step-intro">L&#x27;agente sa solo quello che gli dai. Più i documenti sono chiari, più le risposte sono giuste.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Il preventivo o il computo, con le misure e i materiali.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Il cronoprogramma, con chi entra e quando.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Le schede tecniche dei materiali: colle, rivestimenti, impermeabilizzanti.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Un foglio con le informazioni pratiche: orari di consegna dei fornitori, contatti, dove si scarica, chi chiamare per cosa.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Le tue regole di cantiere, se le hai scritte.</span></div></div></div><div class="step-card"><div class="step-header"><div class="step-number">02</div><div><h3 class="step-title">Crea il progetto e caricaci i documenti</h3><div class="step-time">3 minuti</div></div></div><p class="step-intro">In ChatGPT crea un nuovo <strong>Progetto</strong>, per esempio «Agente cantiere via Roma», e carica i file. Quanti file puoi caricare dipende dal tuo piano.</p><div class="callout info">Prima si usavano i «GPT personalizzati». Oggi OpenAI non permette più di crearne di nuovi sugli account personali (Free, Go, Plus e Pro): per questo usiamo i Progetti, che fanno lo stesso lavoro e si possono condividere.</div></div><div class="step-card"><div class="step-header"><div class="step-number">03</div><div><h3 class="step-title">Scrivi le istruzioni dell&#x27;agente</h3><div class="step-time">3 minuti</div></div></div><p class="step-intro">Nel progetto apri il menu con i tre puntini, poi <strong>Impostazioni del progetto</strong>, e incolla queste istruzioni. Sono le regole che l&#x27;agente segue con tutti.</p><div class="prompt"><div class="prompt-head"><span class="prompt-label">Istruzioni del progetto · L&#x27;agente della squadra</span><button class="copia" type="button">Copia</button></div><pre>Sei l&#x27;assistente del cantiere [NOME DEL CANTIERE] dell&#x27;impresa [NOME IMPRESA]. Rispondi alle domande della squadra.
+
+Come rispondi:
+- Usa solo le informazioni dei documenti di questo progetto. Dimmi sempre da quale documento prendi la risposta.
+- Risposte brevi e pratiche, come le darebbe un capocantiere: prima la risposta, poi il dettaglio se serve.
+- Misure, quantità, prodotti e orari li copi dai documenti. Non li arrotondi e non li stimi.
+
+Quando non sai:
+- Se la risposta non è nei documenti, scrivi: «Non lo trovo nei documenti del cantiere. Chiedi a [NOME DEL TITOLARE], [NUMERO DI TELEFONO]».
+- Poi scrivi la domanda in una riga, pronta da inoltrare.
+
+Mai:
+- Inventare una misura, un prodotto o una data.
+- Dare indicazioni sulla sicurezza diverse da quelle dei documenti: per la sicurezza rimanda sempre al piano di sicurezza e al capocantiere.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">04</div><div><h3 class="step-title">Condividilo con la squadra</h3><div class="step-time">2 minuti</div></div></div><p class="step-intro">Nel progetto premi <strong>Condividi</strong> e invita le persone con la loro email o con un link. La condivisione dei progetti c&#x27;è anche nella versione gratuita di ChatGPT: a ognuno basta un account, anche gratuito.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Dai a tutti l&#x27;accesso <strong>Chat</strong>: possono fare domande e vedere file e istruzioni, ma non cambiarli.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Le chat del progetto le vedono tutti i membri: le risposte restano a disposizione di tutta la squadra.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Spiega alla squadra in un messaggio come si usa: «Prima di chiamarmi, chiedi all&#x27;assistente del cantiere».</span></div></div></div><div class="step-card"><div class="step-header"><div class="step-number">05</div><div><h3 class="step-title">Tienilo aggiornato</h3><div class="step-time">1 minuto ogni cambio</div></div></div><p class="step-intro">Quando cambia qualcosa, cambia il documento nel progetto: una variante, un fornitore nuovo, un orario diverso. Un agente con i documenti vecchi dà risposte vecchie.</p><div class="callout info">Preferisci Claude? Anche lì ci sono i Progetti, pure nella versione gratuita, fino a cinque. Per condividerli con altre persone però serve un piano Team o Enterprise.</div></div></div><h3 class="parte-titolo">Parte 2 · L&#x27;agente che risponde ai clienti su WhatsApp</h3><p class="parte-intro">Il sabato e la domenica nell&#x27;edilizia non risponde quasi nessuno: è lì che puoi battere i concorrenti. Ci sono tre livelli. Il primo lo attivi oggi, gratis, in un quarto d&#x27;ora.</p><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">06</div><div><h3 class="step-title">Livello 1, oggi e gratis: WhatsApp Business</h3><div class="step-time">15 minuti</div></div></div><p class="step-intro">WhatsApp Business è l&#x27;app gratuita di WhatsApp per le aziende, su Android e iPhone. Ha già gli strumenti per rispondere subito, anche quando non ci sei.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Messaggio di benvenuto</strong>: parte da solo quando un cliente ti scrive per la prima volta.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Messaggio di assenza</strong>: lo programmi fuori orario e nel weekend. Dice quando rispondi e cosa ti serve per un preventivo.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Risposte rapide</strong>: le domande per il preventivo salvate una volta, che mandi con due tocchi.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Etichette</strong>: «Preventivo da fare», «Da richiamare lunedì». Il lunedì mattina trovi tutto in ordine.</span></div></div><div class="prompt"><div class="prompt-head"><span class="prompt-label">Da copiare · Il messaggio di assenza del weekend</span><button class="copia" type="button">Copia</button></div><pre>Grazie per averci scritto, siamo [NOME IMPRESA].
+Nel weekend rispondiamo dal lunedì mattina. Intanto, se ti serve un preventivo, scrivici qui:
+1. che lavoro devi fare,
+2. l&#x27;indirizzo del cantiere,
+3. le misure indicative o qualche foto,
+4. quando vorresti iniziare.
+Lunedì ti ricontattiamo noi.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">07</div><div><h3 class="step-title">Livello 2, se nella tua app c&#x27;è: Meta Business Agent</h3><div class="step-time">20 minuti</div></div></div><p class="step-intro">Meta sta portando dentro WhatsApp Business un agente di intelligenza artificiale, <strong>Meta Business Agent</strong>: impara dalle tue chat passate, dal tuo sito e dai listini o cataloghi che carichi, risponde ai clienti a qualsiasi ora e passa a te la conversazione quando serve. Per ora è disponibile per le aziende idonee in alcuni paesi: guarda negli strumenti della tua app se c&#x27;è.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Se c&#x27;è, dagli le regole qui sotto: soprattutto che non deve mai dare prezzi.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Provalo tu prima, da un altro numero, come se fossi un cliente.</span></div></div><div class="prompt"><div class="prompt-head"><span class="prompt-label">Da copiare · Le regole dell&#x27;agente dei clienti</span><button class="copia" type="button">Copia</button></div><pre>Rispondi ai clienti dell&#x27;impresa edile [NOME IMPRESA] di [CITTÀ].
+
+Cosa fai:
+- Rispondi subito e con gentilezza, anche fuori orario.
+- Spieghi cosa facciamo: [ristrutturazioni, rifacimento bagni e cucine, cappotti, impianti] nella zona di [ZONA].
+- Se il cliente vuole un preventivo, gli chiedi: che lavoro deve fare, l&#x27;indirizzo, le misure indicative o delle foto, quando vorrebbe iniziare, il suo nome e un numero di telefono.
+- Alla fine dici: «Grazie, il titolare la ricontatta [lunedì mattina / entro un giorno lavorativo]».
+
+Cosa non fai mai:
+- Dare prezzi, anche indicativi, o sconti.
+- Promettere date di inizio o di fine lavori.
+- Rispondere su questioni tecniche o di sicurezza: dici che risponde il titolare.
+Se il cliente è arrabbiato o la richiesta è urgente, scrivi che lo ricontattiamo il prima possibile e passa la conversazione a una persona.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">08</div><div><h3 class="step-title">Livello 3: un agente tutto tuo, sulla piattaforma ufficiale</h3><div class="step-time">da progettare</div></div></div><p class="step-intro">Se vuoi un agente che usa i tuoi documenti, scrive le richieste direttamente nel tuo gestionale e segue le tue regole al dettaglio, la strada è la <strong>piattaforma ufficiale WhatsApp Business</strong>, quella per le aziende che collegano sistemi propri. Serve una configurazione tecnica e ha costi per i messaggi: è il lavoro che facciamo noi di Cantieri Hub.</p><div class="callout warning">Mai collegare il tuo numero ad app o programmi non ufficiali che promettono di mettere l&#x27;intelligenza artificiale su WhatsApp. Il centro assistenza di WhatsApp dice che le app non supportate violano i termini di servizio e che l&#x27;account può essere bloccato, per un periodo o per sempre.</div></div></div></section><section><div class="section-label">Attenzione</div><h2 class="section-title">Gli errori da evitare</h2><div class="errori-list"><div class="err-item"><div class="err-title">Documenti vecchi nel progetto</div><div class="err-desc">L&#x27;agente della squadra risponde con quello che trova. Se il cronoprogramma è cambiato e il file no, sbaglia con sicurezza.</div></div><div class="err-item"><div class="err-title">Lasciargli dare prezzi</div><div class="err-desc">Né alla squadra né ai clienti: i prezzi li dai tu, sempre. Scrivilo nelle regole.</div></div><div class="err-item"><div class="err-title">Le app non ufficiali su WhatsApp</div><div class="err-desc">Rischi di perdere il numero dell&#x27;impresa. Usa solo WhatsApp Business e la piattaforma ufficiale.</div></div><div class="err-item"><div class="err-title">Non provarlo prima</div><div class="err-desc">Fai tu dieci domande come se fossi un operaio o un cliente. Quello che risponde male lo correggi nelle istruzioni.</div></div></div></section><section><div class="section-label">Fonti</div><h2 class="section-title">Dove abbiamo preso le informazioni</h2><ul class="fonti"><li>OpenAI, guida ai Progetti di ChatGPT (condivisione su Free, Go, Plus e Pro; accesso Chat e Modifica)<br><a href="https://help.openai.com/en/articles/10169521-projects-in-chatgpt" target="_blank" rel="noopener">https://help.openai.com/en/articles/10169521-projects-in-chatgpt</a></li><li>OpenAI, creare un GPT (nuovi GPT non disponibili sugli account personali)<br><a href="https://help.openai.com/en/articles/8554397-creating-a-gpt" target="_blank" rel="noopener">https://help.openai.com/en/articles/8554397-creating-a-gpt</a></li><li>Anthropic, cosa sono i Progetti di Claude (anche gratuiti, condivisione con Team ed Enterprise)<br><a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">https://support.claude.com/en/articles/9517075-what-are-projects</a></li><li>WhatsApp, informazioni su WhatsApp Business (app gratuita, strumenti di messaggistica)<br><a href="https://faq.whatsapp.com/988069844889223/?locale=it_IT" target="_blank" rel="noopener">https://faq.whatsapp.com/988069844889223/?locale=it_IT</a></li><li>WhatsApp Business, Meta Business Agent (disponibile per aziende idonee in alcuni mercati)<br><a href="https://business.whatsapp.com/products/business-app-ai-agent/" target="_blank" rel="noopener">https://business.whatsapp.com/products/business-app-ai-agent/</a></li><li>WhatsApp, informazioni sulle app non supportate<br><a href="https://faq.whatsapp.com/520312452657376/" target="_blank" rel="noopener">https://faq.whatsapp.com/520312452657376/</a></li></ul></section>
+    <div class="cta-block">
+      <h2>Lo vuoi collegato davvero al tuo WhatsApp e ai tuoi documenti?</h2>
+      <p>Noi di Cantieri Hub costruiamo agenti di intelligenza artificiale per imprese edili e studi tecnici: quello che risponde alla squadra e quello che risponde ai clienti, collegati ai tuoi cantieri e alle tue regole.</p>
+      <a class="cta-btn" href="https://cantierihub.com/demo?utm_source=guida&utm_medium=guida&utm_campaign=guida-agente" target="_blank" rel="noopener">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-brand">Cantieri Hub</div>
+    <div class="footer-sub">Sistemi di intelligenza artificiale per imprese edili e studi tecnici · <a href="https://cantierihub.com">cantierihub.com</a></div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copia').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var testo = b.closest('.prompt').querySelector('pre').innerText;
+        var fatto = function () { b.textContent = 'Copiato'; b.classList.add('fatto'); setTimeout(function () { b.textContent = 'Copia'; b.classList.remove('fatto'); }, 2000); };
+        var vecchio = function () { var t = document.createElement('textarea'); t.value = testo; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (err) {} t.remove(); fatto(); };
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(testo).then(fatto, vecchio); } else { vecchio(); }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "slug": "gasolio",
+  "title": "Quanto gasolio consuma ogni cantiere: la tabella fatta con l'intelligenza artificiale",
+  "subtitle": "Il prompt da passare a ChatGPT, o a qualsiasi intelligenza artificiale, per tenere in una tabella i mezzi, il gasolio, i noleggi e le consegne, cantiere per cantiere. Così vedi dove il margine si stringe.",
+  "description": "Il gasolio sta dentro tutto quello che si muove in cantiere: il furgone, l'escavatore, i noleggi, le consegne. Se non lo misuri per cantiere, il margine cala senza che nessuno se ne accorga. In questa guida trovi come raccogliere i dati che servono, il prompt per far costruire all'intelligenza artificiale la tabella dei mezzi e dei consumi, e come leggere ogni mese quanto costa il gasolio su ogni lavoro.",
+  "topic": "costi",
+  "cover_image": "",
+  "html_url": "https://guide.cantierihub.com/guide/gasolio.html",
+  "created_at": "2026-10-25T12:00:00Z",
+  "published": true
+}
