@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Come registrare la tua impresa edile su ChatGPT · Cantieri Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:   #D44E12;
+      --accent2:  #F97316;
+      --bg:       #0A0F1C;
+      --navy:     #0A2D72;
+      --text:     #FFFFFF;
+      --text-mut: rgba(255,255,255,0.70);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Poppins','Helvetica Neue',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; min-height:100vh; }
+    a { color:var(--accent2); }
+
+    .hero { background:linear-gradient(160deg, #0d1b3e 0%, var(--bg) 60%); border-bottom:1px solid rgba(212,78,18,0.2); padding:48px 24px 56px; text-align:center; }
+    .brand-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(212,78,18,0.12); border:1px solid rgba(212,78,18,0.3);
+      border-radius:40px; padding:8px 20px; margin-bottom:28px; font-size:13px; font-weight:700; color:var(--accent2); text-transform:uppercase; letter-spacing:2px; }
+    .brand-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); }
+    .hero h1 { font-size:clamp(1.9rem,5vw,3rem); font-weight:900; color:var(--text); line-height:1.12; margin:0 auto 20px; max-width:860px; }
+    .hero h1 em { color:var(--accent2); font-style:normal; }
+    .hero .sub { font-size:1.08rem; color:var(--text-mut); max-width:640px; margin:0 auto 32px; }
+    .hero-meta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .meta-pill { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:24px; padding:8px 18px; font-size:13px; font-weight:600; color:var(--text-mut); }
+    .meta-pill span { color:var(--text); }
+
+    .container { max-width:820px; margin:0 auto; padding:0 20px; }
+    section { padding:56px 0 0; }
+    .section-label { font-size:11px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:4px; margin-bottom:12px; }
+    .section-title { font-size:clamp(1.4rem,3.5vw,2rem); font-weight:800; color:var(--text); line-height:1.2; margin-bottom:28px; }
+    .section-intro { font-size:.98rem; color:var(--text-mut); margin:-12px 0 28px; }
+
+    .output-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .output-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:26px; }
+    .output-num { width:34px; height:34px; border-radius:10px; background:rgba(212,78,18,0.15); color:var(--accent2); font-weight:800;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+    .output-card h4 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .output-card p { font-size:.92rem; color:var(--text-mut); line-height:1.55; }
+
+    .testo p { font-size:.98rem; color:var(--text-mut); margin-bottom:16px; }
+    .testo p strong { color:var(--text); }
+    .box { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.10); border-left:4px solid var(--accent); border-radius:14px; padding:20px 22px; margin:0 0 16px; }
+    .box h4 { font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .box p { font-size:.94rem; color:var(--text-mut); margin:0; }
+
+    .parte-titolo { font-size:clamp(1.25rem,3vw,1.6rem); font-weight:800; margin:48px 0 10px; }
+    .parte-titolo:first-child { margin-top:0; }
+    .parte-intro { font-size:.98rem; color:var(--text-mut); margin-bottom:24px; }
+
+    .steps-list { display:flex; flex-direction:column; gap:20px; }
+    .step-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:28px; }
+    .step-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:16px; }
+    .step-number { flex-shrink:0; width:52px; height:52px; border-radius:14px; background:var(--accent); color:#fff; font-size:1.2rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center; }
+    .step-title { font-size:1.12rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.3; }
+    .step-time { font-size:.8rem; color:var(--text-mut); font-weight:500; }
+    .step-intro { font-size:.95rem; color:var(--text-mut); line-height:1.65; margin-bottom:16px; }
+    .action-list { display:flex; flex-direction:column; gap:10px; margin-bottom:16px; }
+    .action-item { display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; font-size:.92rem; }
+    .action-arrow { color:var(--accent2); font-weight:800; flex-shrink:0; }
+
+    .prompt { position:relative; background:#0d1526; border:1px solid rgba(249,115,22,0.35); border-radius:14px; margin:0 0 16px; overflow:hidden; }
+    .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 14px 10px 18px;
+      background:rgba(249,115,22,0.10); border-bottom:1px solid rgba(249,115,22,0.25); }
+    .prompt-label { font-size:12px; font-weight:800; color:var(--accent2); text-transform:uppercase; letter-spacing:1.5px; }
+    .copia { font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:0; border-radius:8px; padding:7px 14px; cursor:pointer; }
+    .copia.fatto { background:#15803d; }
+    .prompt pre { white-space:pre-wrap; word-wrap:break-word; font-family:inherit; font-size:.9rem; line-height:1.6; color:#e2e8f0; padding:16px 18px 18px; margin:0; }
+
+    .callout { border-radius:12px; padding:14px 18px; font-size:.9rem; line-height:1.55; margin:0 0 4px; }
+    .callout.info    { background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.25); color:#bfdbfe; }
+    .callout.success { background:rgba(22,163,74,0.1);  border:1px solid rgba(22,163,74,0.25);  color:#bbf7d0; }
+    .callout.warning { background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.25); color:#fde68a; }
+
+    .errori-list { display:flex; flex-direction:column; gap:14px; }
+    .err-item { background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-left:4px solid #ef4444; border-radius:12px; padding:18px 22px; }
+    .err-title { font-size:.98rem; font-weight:700; color:#fca5a5; margin-bottom:4px; }
+    .err-desc { font-size:.9rem; color:var(--text-mut); line-height:1.55; }
+
+    .fonti { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .fonti li { font-size:.86rem; color:var(--text-mut); background:rgba(255,255,255,0.03); border-radius:10px; padding:12px 16px; }
+    .fonti a { word-break:break-word; }
+
+    .cta-block { margin:64px 0 0; background:linear-gradient(135deg, rgba(10,45,114,0.4) 0%, rgba(212,78,18,0.15) 100%);
+      border:1px solid rgba(212,78,18,0.3); border-radius:24px; padding:44px 32px; text-align:center; }
+    .cta-block h2 { font-size:clamp(1.4rem,4vw,2rem); font-weight:900; color:var(--text); margin-bottom:14px; line-height:1.2; }
+    .cta-block p { font-size:.95rem; color:var(--text-mut); max-width:520px; margin:0 auto 28px; }
+    .cta-btn { display:inline-block; background:var(--accent); color:#fff; font-size:1rem; font-weight:800; padding:16px 32px; border-radius:12px; text-decoration:none; }
+    .cta-btn:hover { background:#b83a0a; }
+
+    .footer { text-align:center; padding:40px 24px; margin-top:56px; border-top:1px solid rgba(255,255,255,0.06); }
+    .footer-brand { font-size:1.1rem; font-weight:800; color:var(--accent2); margin-bottom:8px; }
+    .footer-sub { font-size:.8rem; color:var(--text-mut); }
+    @media (max-width:520px) { .step-card { padding:22px 18px; } .step-number { width:44px; height:44px; font-size:1.05rem; } .cta-block { padding:36px 20px; } }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="brand-badge"><div class="brand-dot"></div>Cantieri Hub · Guida gratuita</div>
+    <h1>Come registrare la tua impresa edile <em>su ChatGPT</em></h1>
+    <p class="sub">Dal 10 novembre puoi rivendicare la scheda della tua impresa dentro ChatGPT e scrivere tu che lavori fai e dove. I passi uno per uno, cosa preparare prima e i limiti da conoscere.</p>
+    <div class="hero-meta">
+      <div class="meta-pill">Tempo: <span>20 minuti</span></div>
+      <div class="meta-pill">Ti serve: <span>Un account ChatGPT, anche gratuito</span></div>
+      <div class="meta-pill">Per: <span>imprese edili e studi tecnici</span></div>
+    </div>
+  </div>
+  <div class="container"><section><div class="section-label">Cosa ottieni</div><h2 class="section-title">Alla fine di questa guida</h2><div class="output-grid"><div class="output-card"><div class="output-num">1</div><h4>La scheda della tua impresa</h4><p>Rivendicata e verificata, con la spunta blu: le informazioni su di te le scrivi tu, non le indovina ChatGPT.</p></div><div class="output-card"><div class="output-num">2</div><h4>Cosa preparare prima</h4><p>I documenti e gli accessi da avere sotto mano, così la verifica la fai in una volta sola.</p></div><div class="output-card"><div class="output-num">3</div><h4>La descrizione da copiare</h4><p>Un testo da far scrivere a ChatGPT con i tuoi dati: che lavori fai, dove, per chi.</p></div></div></section><section><div class="section-label">La novità</div><h2 class="section-title">Cosa è cambiato</h2><div class="testo"><p>Quando un cliente chiede a ChatGPT un&#x27;impresa per un lavoro, ChatGPT risponde con dei nomi. Fino a pochi giorni fa non potevi fare niente per dirgli chi sei.</p><p>Il <strong>10 novembre 2026</strong> OpenAI ha aperto, in versione di prova, <strong>Aziende su ChatGPT</strong>: dal <strong>Business Hub</strong> un&#x27;azienda rivendica la sua scheda, aggiorna le informazioni principali e vede quante volte ChatGPT la nomina.</p><div class="box"><h4>Cosa non fa</h4><p>Non ti fa uscire più in alto. OpenAI scrive che rivendicare la scheda non garantisce un posizionamento migliore né vendite, e che ChatGPT continua a dare consigli indipendenti. Quello che cambia è che le informazioni sulla tua impresa le dai tu.</p></div><div class="box"><h4>Quanto costa e chi può farlo</h4><p>Non si paga: basta un account ChatGPT, anche gratuito, e non serve fare pubblicità. La rivendica il titolare, o chi può rappresentare l&#x27;impresa. Per ora OpenAI la apre alle attività che hanno un sito, e cosa si può fare dipende dal paese e dal tipo di attività.</p></div></div></section><section><div class="section-label">La guida</div><h2 class="section-title">Come si fa, passo per passo</h2><div class="steps-list"><div class="step-card"><div class="step-header"><div class="step-number">01</div><div><h3 class="step-title">Prepara quello che ti serve</h3><div class="step-time">5 minuti</div></div></div><p class="step-intro">La verifica chiede dati precisi. Se li hai sotto mano, la fai in una volta sola.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Un account ChatGPT, anche gratuito. Usa quello di chi è titolare o può rappresentare l&#x27;impresa: è l&#x27;account che la gestirà.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Il sito dell&#x27;impresa.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>L&#x27;accesso a uno di questi: il <strong>telefono aziendale</strong>, l&#x27;<strong>email aziendale</strong>, oppure chi ti gestisce il <strong>dominio del sito</strong>.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Un documento d&#x27;identità e i dati dell&#x27;impresa come sono sui documenti ufficiali: ragione sociale, indirizzo, partita IVA.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Se non sei il titolare, un documento che dimostri che puoi rappresentare l&#x27;impresa.</span></div></div><div class="callout info">Nome, indirizzo e numeri che scrivi devono essere uguali a quelli dei documenti ufficiali dell&#x27;impresa. Se non corrispondono, la verifica non passa.</div></div><div class="step-card"><div class="step-header"><div class="step-number">02</div><div><h3 class="step-title">Apri il Business Hub e cerca la tua impresa</h3><div class="step-time">2 minuti</div></div></div><p class="step-intro">Accedi a ChatGPT e apri <a href="https://chatgpt.com/business-hub" target="_blank" rel="noopener">chatgpt.com/business-hub</a>, oppure <strong>Business Hub</strong> dalla barra laterale. Premi <strong>Aggiungi</strong> e scrivi il nome dell&#x27;impresa in <strong>Cerca un&#x27;azienda</strong>.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>La scheda c&#x27;è</strong>: sceglila e conferma l&#x27;account ChatGPT con cui la gestirai.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>La scheda non c&#x27;è</strong>: ChatGPT può proporti di crearla col nome e il sito. Se l&#x27;opzione non compare, per la tua impresa per ora non è disponibile.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Compare «Contatta l&#x27;assistenza»</strong>: la scheda è bloccata. Da lì chiedi l&#x27;accesso a OpenAI.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Qualcun altro l&#x27;ha già rivendicata</strong>: apri il profilo, premi i tre puntini e scegli <strong>Contesta la proprietà</strong>.</span></div></div></div><div class="step-card"><div class="step-header"><div class="step-number">03</div><div><h3 class="step-title">Dimostra che l&#x27;impresa è tua</h3><div class="step-time">5 minuti, di più col dominio</div></div></div><p class="step-intro">ChatGPT ti mostra i modi possibili per la tua scheda. Ne basta uno.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Telefono aziendale</strong>: scegli SMS o chiamata automatica, premi <strong>Ricevi codice</strong> e scrivi il codice che arriva al numero mostrato.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Email aziendale</strong>: premi <strong>Ricevi codice</strong> e scrivi il codice che arriva all&#x27;indirizzo dell&#x27;impresa.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Dominio del sito</strong>: ChatGPT ti dà una riga da aggiungere alle impostazioni del dominio (un record TXT). La aggiunge chi ti gestisce il sito, copiandola esattamente. Poi torni su ChatGPT e premi <strong>Verifica dominio</strong>: può servire un po&#x27; di tempo prima che funzioni.</span></div></div><div class="callout info">OpenAI controlla la richiesta e ti risponde per email, con l&#x27;ok o con una domanda. Finché è in esame puoi ritirarla con <strong>Annulla rivendicazione</strong>.</div></div><div class="step-card"><div class="step-header"><div class="step-number">04</div><div><h3 class="step-title">Verifica la tua identità con Persona</h3><div class="step-time">10 minuti</div></div></div><p class="step-intro">Rivendicare la scheda non basta. Per pubblicare le modifiche e vedere le statistiche serve la verifica dell&#x27;identità con <strong>Persona</strong>, il servizio che OpenAI usa per controllare chi rappresenta l&#x27;impresa.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Premi <strong>Verifica con Persona</strong>, poi <strong>Continua su Persona</strong>, e segui le istruzioni.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Ti possono chiedere un documento d&#x27;identità, i dati di registrazione dell&#x27;impresa e la prova che puoi rappresentarla.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>OpenAI risponde per email. Quando approva, sulla scheda compare la <strong>spunta blu</strong>.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Se all&#x27;inizio l&#x27;hai saltata: apri la scheda <strong>Attività</strong>, il tuo profilo, e trovi <strong>Completa la verifica con Persona</strong>.</span></div></div><div class="callout warning">Se con Persona stai creando una scheda nuova, quando OpenAI la approva va online da sola: non c&#x27;è un passaggio in più per pubblicarla. Vai avanti solo quando la vuoi pubblica. Una scheda pubblicata non si cancella più: si possono eliminare solo le bozze.</div></div><div class="step-card"><div class="step-header"><div class="step-number">05</div><div><h3 class="step-title">Scrivi che lavori fai e dove</h3><div class="step-time">15 minuti</div></div></div><p class="step-intro">Dopo le due approvazioni apri il tuo profilo in <strong>Attività</strong> e aggiorni sito, descrizione, categoria dei servizi, logo e foto di copertina. OpenAI controlla ogni modifica prima di pubblicarla, e può passare del tempo prima che compaia nelle risposte di ChatGPT.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span>Scrivi i lavori che fai davvero, con le parole dei clienti: «rifacimento bagno», non «opere di finitura».</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Scrivi dove lavori: le città e le province.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Scrivi per chi lavori: privati, condomini, aziende.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span>Niente recensioni inventate, garanzie che non puoi dimostrare o risultati promessi: le regole di OpenAI li vietano e la modifica può essere rifiutata.</span></div></div><div class="prompt"><div class="prompt-head"><span class="prompt-label">Da copiare in ChatGPT · La descrizione della tua impresa</span><button class="copia" type="button">Copia</button></div><pre>Scrivi la descrizione della mia impresa per la sua scheda su ChatGPT. Al massimo cinque righe, in italiano semplice, con le parole che usano i clienti.
+
+Chi siamo: [NOME IMPRESA], impresa edile di [CITTÀ], dal [ANNO].
+Lavori che facciamo: [per esempio: rifacimento bagni e cucine, ristrutturazioni complete, cappotti termici, rifacimento tetti].
+Dove lavoriamo: [CITTÀ E PROVINCE].
+Per chi lavoriamo: [privati, condomini, aziende].
+Cosa ci distingue, solo se è vero e lo posso dimostrare: [per esempio: squadre nostre, certificazioni, anni di esperienza].
+
+Regole: niente superlativi, niente prezzi, niente promesse su tempi o risultati. Se un&#x27;informazione manca, lascia la parentesi quadra e non inventarla.</pre></div></div><div class="step-card"><div class="step-header"><div class="step-number">06</div><div><h3 class="step-title">Guarda quante volte ChatGPT ti nomina</h3><div class="step-time">2 minuti a settimana</div></div></div><p class="step-intro">Nella tua attività apri <strong>Statistiche</strong>: trovi i numeri degli ultimi 28 giorni.</p><div class="action-list"><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Menzioni</strong>: per un&#x27;attività locale, quante volte ChatGPT ha mostrato la tua impresa in una risposta, anche se poi il cliente non l&#x27;ha aperta.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Clic sul sito web</strong>: quante persone da ChatGPT sono passate al tuo sito.</span></div><div class="action-item"><span class="action-arrow">&rarr;</span><span><strong>Argomenti di scoperta</strong>: i temi delle risposte in cui compari. Le domande dei clienti e le loro chat non le vedi.</span></div></div><div class="callout info">Una statistica vuota non vuol dire che nessuno ti abbia cercato: sotto una certa soglia i numeri non vengono mostrati.</div></div></div></section><section><div class="section-label">Attenzione</div><h2 class="section-title">Gli errori da evitare</h2><div class="errori-list"><div class="err-item"><div class="err-title">Pensare che ti faccia uscire più in alto</div><div class="err-desc">La scheda non garantisce più visibilità né più clienti, e la pubblicità non cambia i consigli di ChatGPT. Ti dà una cosa sola, ma importante: le informazioni sulla tua impresa le scrivi tu.</div></div><div class="err-item"><div class="err-title">Dati diversi dai documenti</div><div class="err-desc">Se nome, indirizzo o partita IVA non corrispondono ai documenti ufficiali dell&#x27;impresa, la verifica con Persona non passa e va rifatta.</div></div><div class="err-item"><div class="err-title">Pubblicare una scheda non pronta</div><div class="err-desc">Una scheda pubblicata non si cancella. Sistema prima i dati, poi completa la verifica.</div></div><div class="err-item"><div class="err-title">Farla rivendicare a qualcun altro col suo account</div><div class="err-desc">La rivendica chi è titolare o può rappresentare l&#x27;impresa, col proprio account. Dopo, dal Business Hub, può aggiungere i colleghi o dare l&#x27;accesso a un&#x27;agenzia: ognuno entra col suo account.</div></div><div class="err-item"><div class="err-title">Aspettarsi l&#x27;assistente che risponde ai clienti</div><div class="err-desc">Gli agenti Business, quelli che chattano coi clienti al posto tuo, per ora ci sono solo negli Stati Uniti, per chi vende online o offre servizi online.</div></div></div></section><section><div class="section-label">Fonti</div><h2 class="section-title">Dove abbiamo preso le informazioni</h2><ul class="fonti"><li>OpenAI, Ti presentiamo Aziende su ChatGPT, 10 novembre 2026, versione di prova<br><a href="https://openai.com/it-IT/index/introducing-businesses-chatgpt/" target="_blank" rel="noopener">https://openai.com/it-IT/index/introducing-businesses-chatgpt/</a></li><li>OpenAI, Configurare la tua attività su ChatGPT: i passi, la verifica con Persona, le statistiche<br><a href="https://help.openai.com/it-it/articles/20001635" target="_blank" rel="noopener">https://help.openai.com/it-it/articles/20001635</a></li><li>OpenAI, Attività in ChatGPT: chi può rivendicare il proprio profilo e cosa cambia<br><a href="https://openai.com/it-IT/business/businesses-in-chatgpt/" target="_blank" rel="noopener">https://openai.com/it-IT/business/businesses-in-chatgpt/</a></li><li>OpenAI, le regole per le attività in ChatGPT (in inglese)<br><a href="https://openai.com/policies/businesses-in-chatgpt/" target="_blank" rel="noopener">https://openai.com/policies/businesses-in-chatgpt/</a></li></ul></section>
+    <div class="cta-block">
+      <h2>Vuoi vederlo sulla tua impresa?</h2>
+      <p>Noi di Cantieri Hub facciamo strumenti di intelligenza artificiale per imprese edili e studi tecnici. In una consulenza ti facciamo vedere da dove partire, sul tuo lavoro.</p>
+      <a class="cta-btn" href="https://cantierihub.com/demo?utm_source=guida&utm_medium=guida&utm_campaign=guida-scheda" target="_blank" rel="noopener">Prenota una consulenza gratuita</a>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-brand">Cantieri Hub</div>
+    <div class="footer-sub">Sistemi di intelligenza artificiale per imprese edili e studi tecnici · <a href="https://cantierihub.com">cantierihub.com</a></div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.copia').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var testo = b.closest('.prompt').querySelector('pre').innerText;
+        var fatto = function () { b.textContent = 'Copiato'; b.classList.add('fatto'); setTimeout(function () { b.textContent = 'Copia'; b.classList.remove('fatto'); }, 2000); };
+        var vecchio = function () { var t = document.createElement('textarea'); t.value = testo; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+          document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (err) {} t.remove(); fatto(); };
+        if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(testo).then(fatto, vecchio); } else { vecchio(); }
+      });
+    });
+  </script>
+</body>
+</html>
